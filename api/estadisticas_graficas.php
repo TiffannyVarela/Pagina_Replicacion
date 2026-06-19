@@ -1,5 +1,20 @@
 <?php
+
 require_once '../config/db.php';
+
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+
+if (!isMySQLConnected()) {
+    echo json_encode([
+        'tablas' => [],
+        'pendientes_por_tabla' => [],
+        'errores_por_tabla' => [],
+        'porcentaje_exito' => 0,
+        'eventos_diarios' => ['fechas' => [], 'cantidades' => []]
+    ]);
+    exit;
+}
 
 // Pendientes por tabla
 $sql1 = "SELECT tabla_afectada, COUNT(*) as total 
@@ -7,12 +22,12 @@ $sql1 = "SELECT tabla_afectada, COUNT(*) as total
          WHERE estado_replicacion = 'PENDIENTE' 
          GROUP BY tabla_afectada 
          ORDER BY total DESC LIMIT 5";
-$result1 = $conn->query($sql1);
+$result1 = $conn_mysql->query($sql1);
 $tablas = [];
 $pendientes = [];
 while($row = $result1->fetch_assoc()) {
     $tablas[] = $row['tabla_afectada'];
-    $pendientes[] = $row['total'];
+    $pendientes[] = (int)$row['total'];
 }
 
 // Errores por tabla
@@ -21,10 +36,10 @@ $sql2 = "SELECT tabla_afectada, COUNT(*) as total
          WHERE estado_replicacion = 'ERROR' 
          GROUP BY tabla_afectada 
          ORDER BY total DESC LIMIT 5";
-$result2 = $conn->query($sql2);
+$result2 = $conn_mysql->query($sql2);
 $errores = [];
 while($row = $result2->fetch_assoc()) {
-    $errores[] = $row['total'];
+    $errores[] = (int)$row['total'];
 }
 
 // Porcentaje de éxito
@@ -32,22 +47,23 @@ $sql3 = "SELECT
             ROUND(SUM(CASE WHEN estado_replicacion = 'REPLICADO' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) as porcentaje
          FROM bitacora_replicacion 
          WHERE created_at >= DATE_SUB(NOW(), INTERVAL 24 HOUR)";
-$result3 = $conn->query($sql3);
-$porcentaje = $result3->fetch_assoc()['porcentaje'] ?? 0;
+$result3 = $conn_mysql->query($sql3);
+$porcentaje = $result3 ? (float)($result3->fetch_assoc()['porcentaje'] ?? 0) : 0;
 
-// Eventos diarios desde vista_resumen_logs
-$sql4 = "SELECT dia, total_eventos 
-         FROM vista_resumen_logs 
+// Eventos diarios
+$sql4 = "SELECT DATE(fecha) as dia, COUNT(*) as total_eventos 
+         FROM logs_replicacion 
+         WHERE fecha >= DATE_SUB(NOW(), INTERVAL 7 DAY)
+         GROUP BY DATE(fecha) 
          ORDER BY dia DESC LIMIT 7";
-$result4 = $conn->query($sql4);
+$result4 = $conn_mysql->query($sql4);
 $fechas = [];
 $cantidades = [];
 while($row = $result4->fetch_assoc()) {
     $fechas[] = $row['dia'];
-    $cantidades[] = $row['total_eventos'];
+    $cantidades[] = (int)$row['total_eventos'];
 }
 
-header('Content-Type: application/json');
 echo json_encode([
     'tablas' => $tablas,
     'pendientes_por_tabla' => $pendientes,

@@ -28,8 +28,11 @@ $oracle_online = isOracleConnected();
             <?php if (!$mysql_online): ?>
                 <span class="offline-badge">MySQL OFFLINE</span>
             <?php endif; ?>
+            <?php if (!$oracle_online): ?>
+                <span class="offline-badge">Oracle OFFLINE</span>
+            <?php endif; ?>
         </h1>
-        <h6 class="mb-4 text-muted">MySQL → Oracle | GlobalShipping Corp.</h6>
+        <h6 class="mb-4 text-muted">MySQL ↔ Oracle | GlobalShipping Corp.</h6>
         
         <div class="row mb-4" id="indicadores">
             <div class="col-md-3">
@@ -76,7 +79,6 @@ $oracle_online = isOracleConnected();
                         <?php if (!$mysql_online): ?>
                             <div class="data-unavailable">
                                 <p>📡 Datos no disponibles</p>
-                                <small>MySQL está desconectado</small>
                             </div>
                         <?php else: ?>
                             <canvas id="chartEstadoTablas" height="250"></canvas>
@@ -93,7 +95,6 @@ $oracle_online = isOracleConnected();
                         <?php if (!$mysql_online): ?>
                             <div class="data-unavailable">
                                 <p>📡 Datos no disponibles</p>
-                                <small>MySQL está desconectado</small>
                             </div>
                         <?php else: ?>
                             <canvas id="chartPorcentajeExito" height="250"></canvas>
@@ -113,7 +114,6 @@ $oracle_online = isOracleConnected();
                         <?php if (!$mysql_online): ?>
                             <div class="data-unavailable">
                                 <p>📡 Datos no disponibles</p>
-                                <small>MySQL está desconectado</small>
                             </div>
                         <?php else: ?>
                             <canvas id="chartEventosDiarios" height="250"></canvas>
@@ -150,6 +150,11 @@ $oracle_online = isOracleConnected();
                                 <small>⚠️ No hay conexión con MySQL. Verifica que Aiven esté encendido y tu IP esté permitida.</small>
                             </div>
                         <?php endif; ?>
+                        <?php if (!$oracle_online): ?>
+                            <div class="alert alert-warning mt-3 mb-0">
+                                <small>⚠️ No hay conexión con Oracle. Verifica que AWS esté encendido y tu IP esté permitida.</small>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -164,7 +169,6 @@ $oracle_online = isOracleConnected();
                     <?php if (!$mysql_online): ?>
                         <div class="data-unavailable">
                             <p>📡 Datos no disponibles</p>
-                            <small>MySQL está desconectado</small>
                         </div>
                     <?php else: ?>
                         <table class="table table-sm table-events">
@@ -189,7 +193,6 @@ $oracle_online = isOracleConnected();
                     <?php if (!$mysql_online): ?>
                         <div class="data-unavailable">
                             <p>📡 Datos no disponibles</p>
-                            <small>MySQL está desconectado</small>
                         </div>
                     <?php else: ?>
                         <table class="table table-sm table-danger">
@@ -201,6 +204,48 @@ $oracle_online = isOracleConnected();
                             </tbody>
                         </table>
                     <?php endif; ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>🗄️ Tablas en Oracle</h5>
+                <small class="text-muted">Datos disponibles en AWS RDS</small>
+            </div>
+            <div class="card-body">
+                <div id="oracleTablesContainer">
+                    <div class="text-center" id="oracleLoading">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Cargando...</span>
+                        </div>
+                        <p>Cargando datos de Oracle...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>🔄 Comparación de Datos: MySQL vs Oracle</h5>
+                <small class="text-muted">Verifica la sincronización entre bases de datos</small>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-sm" id="tablaComparacion">
+                        <thead>
+                            <tr>
+                                <th>Tabla MySQL</th>
+                                <th>Tabla Oracle</th>
+                                <th>MySQL</th>
+                                <th>Oracle</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpoComparacion">
+                            <tr><td colspan="5" class="text-center">Cargando...</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -264,6 +309,8 @@ $oracle_online = isOracleConnected();
             cargarEventosRecientes();
             cargarErrores();
             cargarEstadoConexion();
+            cargarOracleData();      // <-- NUEVO
+            cargarComparacion();     // <-- NUEVO
         }
         
         function cargarIndicadores() {
@@ -272,6 +319,13 @@ $oracle_online = isOracleConnected();
                 $('#replicados').text(data.replicados || 0);
                 $('#errores').text(data.errores || 0);
                 $('#conflictos').text(data.conflictos || 0);
+                
+                // Actualizar indicadores de Oracle en el estado de conexión
+                if (data.oracle_online) {
+                    $('#estado_oracle').html('● Online');
+                    $('#estado_oracle').attr('class', 'status-online');
+                    $('#estado_oracle').attr('data-tooltip', `Oracle: ${data.oracle_tables} tablas, ${data.oracle_rows} registros`);
+                }
             }).fail(function() {
                 $('#pendientes').text('?');
                 $('#replicados').text('?');
@@ -374,27 +428,155 @@ $oracle_online = isOracleConnected();
         }
         
         function cargarEstadoConexion() {
-            $.getJSON('api/estado_conexion.php', function(data) {
-                if (data.mysql) {
-                    $('#estado_mysql').html('● Online');
-                    $('#estado_mysql').attr('class', 'status-online');
-                } else {
-                    $('#estado_mysql').html('○ Offline');
-                    $('#estado_mysql').attr('class', 'status-offline');
-                }
-                
-                if (data.oracle) {
-                    $('#estado_oracle').html('● Online');
-                    $('#estado_oracle').attr('class', 'status-online');
-                } else {
-                    $('#estado_oracle').html('○ Offline');
-                    $('#estado_oracle').attr('class', 'status-offline');
-                }
-                
-                $('#ultima_ejecucion').text(data.ultima_ejecucion || 'No registrada');
-            });
+            $.getJSON('api/estado_conexion.php')
+                .done(function(data) {
+                    // Actualizar MySQL
+                    let mysqlSpan = $('#estado_mysql');
+                    if (data.mysql) {
+                        mysqlSpan.html('● Online');
+                        mysqlSpan.attr('class', 'status-online');
+                        mysqlSpan.attr('data-tooltip', 'Conexión exitosa a MySQL');
+                    } else {
+                        mysqlSpan.html('○ Offline');
+                        mysqlSpan.attr('class', 'status-offline');
+                        mysqlSpan.attr('data-tooltip', data.mysql_error || 'MySQL no disponible');
+                    }
+                    
+                    // Actualizar Oracle
+                    let oracleSpan = $('#estado_oracle');
+                    if (data.oracle) {
+                        oracleSpan.html('● Online');
+                        oracleSpan.attr('class', 'status-online');
+                        oracleSpan.attr('data-tooltip', data.oracle_detalle || 'Conexión exitosa a Oracle');
+                    } else {
+                        oracleSpan.html('○ Offline');
+                        oracleSpan.attr('class', 'status-offline');
+                        oracleSpan.attr('data-tooltip', data.oracle_error || data.oracle_detalle || 'Oracle no disponible');
+                    }
+                    
+                    // Actualizar última ejecución
+                    $('#ultima_ejecucion').text(data.ultima_ejecucion || 'No registrada');
+                    
+                    // Mostrar detalles si hay error
+                    if (!data.oracle && data.oracle_detalle) {
+                        console.log('Oracle error details:', data.oracle_detalle);
+                    }
+                })
+                .fail(function(jqXHR, textStatus, errorThrown) {
+                    console.error('Error al obtener estado de conexión:', textStatus, errorThrown);
+                });
         }
-        
+
+        // CARGAR DATOS DE ORACLE
+
+        function cargarOracleData() {
+            // Cargar tablas de Oracle
+            $.getJSON('api/oracle_data.php?action=summary')
+                .done(function(data) {
+                    if (data.success && data.oracle_online) {
+                        let html = `
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="alert alert-success">
+                                        <strong>✅ Oracle Online</strong>
+                                        <br>Total tablas: ${data.total_tables}
+                                        <br>Total registros: ${data.total_rows}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h6>Tablas disponibles:</h6>
+                                            <div style="max-height: 200px; overflow-y: auto;">
+                                                <table class="table table-sm table-striped">
+                                                    <thead>
+                                                        <tr><th>Tabla</th><th>Registros</th></tr>
+                                                    </thead>
+                                                    <tbody>
+                                        `;
+                                        
+                        data.tables.forEach(function(table) {
+                            html += `<tr><td>${table.name}</td><td>${table.rows}</td></tr>`;
+                        });
+                        
+                        html += `
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        $('#oracleTablesContainer').html(html);
+                    } else {
+                        $('#oracleTablesContainer').html(`
+                            <div class="alert alert-warning">
+                                ⚠️ No se pudieron cargar datos de Oracle
+                                <br><small>${data.error || 'Oracle no disponible'}</small>
+                            </div>
+                        `);
+                    }
+                })
+                .fail(function() {
+                    $('#oracleTablesContainer').html(`
+                        <div class="alert alert-danger">
+                            ❌ Error al conectar con Oracle
+                        </div>
+                    `);
+                });
+        }
+
+        // CARGAR COMPARACIÓN MYSQL ↔ ORACLE
+
+        function cargarComparacion() {
+            $.getJSON('api/comparacion_replicacion.php')
+                .done(function(data) {
+                    let html = '';
+                    
+                    if (!data.mysql_online || !data.oracle_online) {
+                        html = `<tr><td colspan="5" class="text-center text-warning">
+                            ⚠️ ${!data.mysql_online ? 'MySQL' : ''} 
+                            ${!data.mysql_online && !data.oracle_online ? 'y' : ''} 
+                            ${!data.oracle_online ? 'Oracle' : ''} no está disponible
+                        </td></tr>`;
+                        $('#cuerpoComparacion').html(html);
+                        return;
+                    }
+                    
+                    data.comparison.forEach(function(item) {
+                        let statusBadge = '';
+                        let statusText = '';
+                        
+                        if (item.mysql_count < 0) {
+                            statusBadge = 'badge bg-warning';
+                            statusText = '⚠️ Error MySQL';
+                        } else if (item.match) {
+                            statusBadge = 'badge bg-success';
+                            statusText = '✅ Sincronizado';
+                        } else {
+                            statusBadge = 'badge bg-danger';
+                            statusText = `❌ Diferencia: ${item.difference}`;
+                        }
+                        
+                        html += `<tr>
+                            <td><code>${item.mysql_table}</code></td>
+                            <td><code>${item.oracle_table}</code></td>
+                            <td class="text-center">${item.mysql_count >= 0 ? item.mysql_count : 'N/A'}</td>
+                            <td class="text-center">${item.oracle_count >= 0 ? item.oracle_count : 'N/A'}</td>
+                            <td><span class="${statusBadge}">${statusText}</span></td>
+                        </tr>`;
+                    });
+                    
+                    $('#cuerpoComparacion').html(html);
+                })
+                .fail(function() {
+                    $('#cuerpoComparacion').html(`
+                        <tr><td colspan="5" class="text-center text-danger">Error al cargar comparación</td></tr>
+                    `);
+                });
+        }
+
         $('#btnAplicarFiltros').click(function() {
             cargarEventosRecientes();
         });

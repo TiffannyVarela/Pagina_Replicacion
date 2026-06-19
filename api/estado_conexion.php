@@ -1,68 +1,88 @@
 <?php
-// Estado de ambas conexiones: MySQL y Oracle
 
 require_once '../config/db.php';
 
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
 
-$response = [
-    'mysql' => false,
-    'oracle' => false,
-    'mysql_error' => null,
-    'oracle_error' => null,
-    'oracle_detalle' => null,
-    'ultima_ejecucion' => null,
-    'timestamp' => date('Y-m-d H:i:s')
-];
+// VERIFICAR CONEXIÓN MYSQL
+$mysql_online = false;
+$mysql_error_msg = null;
 
-// VERIFICAR MYSQL
-$response['mysql'] = isMySQLConnected();
-if (!$response['mysql']) {
-    global $mysql_error;
-    $response['mysql_error'] = $mysql_error ?? 'Conexión fallida';
-}
-
-// Obtener última ejecución (si MySQL está disponible)
-if ($response['mysql'] && $conn_mysql) {
-    $sql = "SELECT ultima_ejecucion FROM control_replicacion 
-            WHERE sistema_origen = 'MYSQL' AND sistema_destino = 'ORACLE' 
-            ORDER BY id DESC LIMIT 1";
-    $result = $conn_mysql->query($sql);
-    if ($result && $row = $result->fetch_assoc()) {
-        $response['ultima_ejecucion'] = $row['ultima_ejecucion'];
+try {
+    global $conn_mysql;
+    
+    if ($conn_mysql !== null && @$conn_mysql->ping()) {
+        $mysql_online = true;
+    } else {
+        $mysql_error_msg = 'MySQL no responde al ping';
     }
+} catch (Exception $e) {
+    $mysql_error_msg = $e->getMessage();
 }
 
-// VERIFICAR ORACLE
-$oracle_host = 'globalshippingdb.ct2q4262uyl7.us-east-2.rds.amazonaws.com';
-$oracle_port = '1521';
-$oracle_service = 'DATABASE';
-$oracle_username = 'admin';
-$oracle_password = 'Holamundo_504';
+// VERIFICAR CONEXIÓN ORACLE
+$oracle_online = false;
+$oracle_error_msg = null;
+$oracle_detalle = null;
 
 if (!extension_loaded('oci8')) {
-    $response['oracle_error'] = 'OCI8 extensión no instalada';
-    $response['oracle_detalle'] = 'Oracle Instant Client no está configurado';
+    $oracle_error_msg = 'OCI8 extensión no instalada';
+    $oracle_detalle = 'Oracle Instant Client no está configurado';
 } else {
     try {
-        $oracle_tns = "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=$oracle_host)(PORT=$oracle_port))(CONNECT_DATA=(SERVICE_NAME=$oracle_service)))";
-        $conn = @oci_connect($oracle_username, $oracle_password, $oracle_tns, 'AL32UTF8');
+        $tns = getOracleTNS();
+        $conn = @oci_connect(ORACLE_USERNAME, ORACLE_PASSWORD, $tns, ORACLE_CHARSET);
         
         if ($conn) {
-            $response['oracle'] = true;
-            $response['oracle_detalle'] = 'Conexión exitosa';
+            $oracle_online = true;
+            $oracle_detalle = 'Conexión exitosa a Oracle';
             oci_close($conn);
         } else {
             $e = oci_error();
-            $response['oracle_error'] = 'Error de conexión';
-            $response['oracle_detalle'] = $e['message'] ?? 'Credenciales inválidas o servidor no disponible';
+            $oracle_error_msg = 'Error de conexión Oracle';
+            $oracle_detalle = $e['message'] ?? 'Error desconocido';
         }
     } catch (Exception $e) {
-        $response['oracle_error'] = 'Excepción';
-        $response['oracle_detalle'] = $e->getMessage();
+        $oracle_error_msg = 'Excepción al conectar Oracle';
+        $oracle_detalle = $e->getMessage();
     }
 }
+
+// OBTENER ÚLTIMA EJECUCIÓN
+$ultima_ejecucion = null;
+if ($mysql_online && isset($conn_mysql) && $conn_mysql !== null) {
+    try {
+        $sql = "SELECT ultima_ejecucion FROM control_replicacion 
+                WHERE sistema_origen = 'MYSQL' AND sistema_destino = 'ORACLE' 
+                ORDER BY id DESC LIMIT 1";
+        $result = $conn_mysql->query($sql);
+        if ($result && $row = $result->fetch_assoc()) {
+            $ultima_ejecucion = $row['ultima_ejecucion'];
+        }
+    } catch (Exception $e) {
+        // No crítico
+    }
+}
+
+// ENVIAR RESPUESTA
+$response = [
+    'mysql' => $mysql_online,
+    'oracle' => $oracle_online,
+    'mysql_error' => $mysql_error_msg,
+    'oracle_error' => $oracle_error_msg,
+    'oracle_detalle' => $oracle_detalle,
+    'ultima_ejecucion' => $ultima_ejecucion,
+    'timestamp' => date('Y-m-d H:i:s'),
+    '_debug' => [
+        'oracle_host' => ORACLE_HOST,
+        'oracle_port' => ORACLE_PORT,
+        'oracle_service' => ORACLE_SERVICE,
+        'oci8_loaded' => extension_loaded('oci8')
+    ]
+];
 
 echo json_encode($response);
 ?>
