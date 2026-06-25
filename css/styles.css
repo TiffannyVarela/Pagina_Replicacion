@@ -1,4 +1,4 @@
-/* Tarjetas de estadísticas */
+/*ESTILOS BASE Y TARJETAS DE ESTADÍSTICAS*/
 .card-stats { 
     transition: transform 0.2s; 
     cursor: pointer;
@@ -8,7 +8,7 @@
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-/* Estados de conexión */
+/*ESTADOS DE CONEXIÓN*/
 .status-online { 
     color: #28a745; 
     font-weight: bold; 
@@ -20,13 +20,14 @@
 .status-checking { 
     color: #ffc107; 
     font-weight: bold; 
+    animation: pulse 1.5s infinite;
 }
 .status-unknown { 
     color: #6c757d; 
     font-weight: bold; 
 }
 
-/* Tabla de eventos */
+/*TABLAS Y EVENTOS*/
 .table-events { 
     font-size: 14px; 
 }
@@ -35,7 +36,7 @@
     cursor: pointer;
 }
 
-/* Botón de refresco */
+/*BOTÓN DE REFRESCO*/
 .refresh-btn { 
     position: fixed; 
     bottom: 20px; 
@@ -50,7 +51,7 @@
     transition: transform 0.2s;
 }
 
-/* Badges personalizados */
+/*BADGES*/
 .badge-pendiente {
     background-color: #ffc107;
     color: #000;
@@ -68,7 +69,7 @@
     color: #fff;
 }
 
-/* Tooltips para estados de conexión */
+/*TOOLTIPS PARA ESTADOS DE CONEXIÓN*/
 [data-tooltip] {
     position: relative;
     cursor: help;
@@ -89,27 +90,111 @@
     z-index: 1000;
 }
 
-/* Tarjeta de estado de conexión */
-.card-estado {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+/*HEADER DE TARJETAS*/
+.card-header-custom { 
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+    color: white; 
 }
-.card-estado .card-header {
-    background: rgba(255,255,255,0.1);
-    border-bottom: none;
+.card-header-custom h5 { 
+    margin: 0; 
+}
+.card-header-custom small {
+    color: rgba(255,255,255,0.8) !important;
 }
 
-/* Animaciones */
+/*TARJETA DE ESTADO DE CONEXIÓN*/
+.card-estado {
+    border: 1px solid #dee2e6 !important;
+    border-radius: 8px !important;
+}
+
+.card-estado .card-header {
+    border-radius: 8px 8px 0 0 !important;
+    padding: 12px 20px !important;
+}
+
+.card-estado .card-header h5 {
+    margin: 0 !important;
+}
+
+.card-estado .card-header * {
+    color: #212529 !important;
+}
+
+.card-estado .text-muted {
+    color: #6c757d !important;
+}
+
+.card-estado .border {
+    border-color: #dee2e6 !important;
+}
+
+.card-estado .card-header-custom h5 {
+    color: #ffffff !important;
+}
+
+/*ESTADOS OFFLINE Y DATOS NO DISPONIBLES*/
+.offline-card { 
+    opacity: 0.7; 
+}
+.data-unavailable { 
+    background-color: #f8f9fa; 
+    text-align: center; 
+    padding: 40px; 
+    color: #6c757d; 
+    border-radius: 8px; 
+}
+.offline-badge { 
+    background-color: #dc3545; 
+    color: white; 
+    font-size: 12px; 
+    padding: 2px 8px; 
+    border-radius: 20px; 
+    margin-left: 10px; 
+}
+.online-badge { 
+    background-color: #28a745; 
+    color: white; 
+    font-size: 12px; 
+    padding: 2px 8px; 
+    border-radius: 20px; 
+    margin-left: 10px; 
+}
+
+/*COMPARACIÓN DE TABLAS*/
+.comparison-match { 
+    background-color: #d4edda; 
+}
+.comparison-mismatch { 
+    background-color: #f8d7da; 
+}
+
+/*TABLA DE ORACLE*/
+.tabla-oracle { 
+    font-size: 13px; 
+}
+.tabla-oracle td { 
+    padding: 4px 8px; 
+}
+.oracle-data-container { 
+    max-height: 300px; 
+    overflow-y: auto; 
+}
+.oracle-table-item { 
+    transition: background-color 0.2s; 
+}
+.oracle-table-item:hover { 
+    background-color: #f8f9fa; 
+}
+
+/*ANIMACIONES*/
 @keyframes pulse {
     0% { opacity: 1; }
     50% { opacity: 0.5; }
     100% { opacity: 1; }
 }
-.status-checking {
-    animation: pulse 1.5s infinite;
-}
 
-/* Responsive */
+/*RESPONSIVE*/
 @media (max-width: 768px) {
     .refresh-btn {
         bottom: 10px;
@@ -119,5 +204,50 @@
     }
     .card-stats h2 {
         font-size: 1.5rem;
+    }
+    .offline-badge, .online-badge {
+        font-size: 10px;
+        padding: 1px 6px;
+        margin-left: 5px;
+    }
+    h1 {
+        font-size: 1.5rem;
+    }
+}
+
+/*ESTILOS ADICIONALES*/
+#comparacionResumen .alert {
+    margin-bottom: 0;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+#comparacionResumen .alert:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+    #comparacionResumen .col-sm-6 {
+        margin-bottom: 5px;
+    }
+    #comparacionResumen .alert {
+        padding: 8px !important;
+    }
+    #comparacionResumen .h5 {
+        font-size: 1.1rem;
+    }
+}
+
+/*TABLA DE COMPARACIÓN*/
+@media (max-width: 576px) {
+    #tablaComparacion {
+        font-size: 12px;
+    }
+    #tablaComparacion td, 
+    #tablaComparacion th {
+        padding: 4px 6px;
+    }
+    #tablaComparacion code {
+        font-size: 10px;
     }
 }
