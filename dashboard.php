@@ -313,10 +313,56 @@
                     </div>
                 </div>
             </div>
+            <!--Filtros de Busqueda. Permite filtrar eventos por tabla y estado-->
+            <!--MySQL-->
+            <?php if ($mysql_online): ?>
+            <div class="card mb-4">
+                <div class="card-header card-header-custom">
+                    <h5>🔍 Filtros de Búsqueda - MySQL</h5>
+                </div>
+                <div class="card-body">
+                    <!--Filtro por tabla-->
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Filtrar por tabla:</label>
+                            <select id="filtroTabla" class="form-select">
+                                <option value="">Todas</option>
+                                <option value="tbl_clientes_logisticos">Clientes</option>
+                                <option value="centros_logisticos">Centros</option>
+                                <option value="contenedores">Contenedores</option>
+                                <option value="ordenes_envio">Embarques</option>
+                                <option value="stock_carga">Inventario</option>
+                                <option value="tbl_facturas_logisticas">Facturas</option>
+                                <option value="servicios_logisticos">Servicios</option>
+                                <option value="factura_servicios">Detalle Factura</option>
+                                <option value="movimientos_carga">Transferencias</option>
+                                <option value="unidades_transporte">Unidades Transporte</option>
+                            </select>
+                        </div>
+                        <!--Filtro por estado-->
+                        <div class="col-md-4">
+                            <label>Filtrar por estado:</label>
+                            <select id="filtroEstado" class="form-select">
+                                <option value="">Todos</option>
+                                <option value="PENDIENTE">Pendientes</option>
+                                <option value="REPLICADO">Replicados</option>
+                                <option value="ERROR">Errores</option>
+                                <option value="CONFLICTO">Conflictos</option>
+                            </select>
+                        </div>
+                        <!--Boton aplicar filtros-->
+                        <div class="col-md-4">
+                            <label>&nbsp;</label>
+                            <button id="btnAplicarFiltros" class="btn btn-primary w-100">Aplicar Filtros</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
             <!--Eventos y Errores. Ultimos 10 eventos procesados con su estado-->
             <div class="card mb-4">
                 <div class="card-header card-header-custom">
-                    <h5>📋 Últimos 10 Eventos MySQL</h5>
+                    <h5>📋 Últimos 10 Eventos</h5>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -338,30 +384,7 @@
                     </div>
                 </div>
             </div>
-            <!--Eventos de Oracle-->
-            <div class="card mb-4">
-                <div class="card-header card-header-custom">
-                    <h5>📋 Últimos 10 Eventos Oracle</h5>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <?php if (!$oracle_online): ?>
-                            <div class="data-unavailable">
-                                <p>📡 Oracle offline</p>
-                            </div>
-                        <?php else: ?>
-                            <table class="table table-sm table-events">
-                                <thead>
-                                    <tr><th>ID</th><th>Tabla</th><th>Operacion</th><th>Fecha/Hora</th><th>Estado</th></tr>
-                                </thead>
-                                <tbody id="tablaEventosOracle">
-                                    <tr><td colspan="5" class="text-center">Cargando...</td></tr>
-                                </tbody>
-                            </table>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </div>
+            
             <!--Registros con Error. Muestra los errores de replicacion-->
             <div class="card mb-4">
                 <div class="card-header card-header-custom">
@@ -421,89 +444,6 @@
                 </div>
             </div>
             
-            <!--Filtros de Busqueda. Permite filtrar eventos por tabla y estado-->
-            <!--MySQL-->
-            <?php if ($mysql_online): ?>
-            <div class="card mb-4">
-                <div class="card-header card-header-custom">
-                    <h5>🔍 Filtros de Búsqueda - MySQL</h5>
-                </div>
-                <div class="card-body">
-                    <!--Filtro por tabla-->
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>Filtrar por tabla:</label>
-                            <select id="filtroTabla" class="form-select">
-                                <option value="">Todas</option>
-                                <option value="tbl_clientes_logisticos">Clientes</option>
-                                <option value="centros_logisticos">Centros</option>
-                                <option value="contenedores">Contenedores</option>
-                                <option value="ordenes_envio">Embarques</option>
-                                <option value="stock_carga">Inventario</option>
-                                <option value="tbl_facturas_logisticas">Facturas</option>
-                                <option value="servicios_logisticos">Servicios</option>
-                                <option value="factura_servicios">Detalle Factura</option>
-                                <option value="movimientos_carga">Transferencias</option>
-                                <option value="unidades_transporte">Unidades Transporte</option>
-                            </select>
-                        </div>
-                        <!--Filtro por estado-->
-                        <div class="col-md-4">
-                            <label>Filtrar por estado:</label>
-                            <select id="filtroEstado" class="form-select">
-                                <option value="">Todos</option>
-                                <option value="PENDIENTE">Pendientes</option>
-                                <option value="REPLICADO">Replicados</option>
-                                <option value="ERROR">Errores</option>
-                                <option value="CONFLICTO">Conflictos</option>
-                            </select>
-                        </div>
-                        <!--Boton aplicar filtros-->
-                        <div class="col-md-4">
-                            <label>&nbsp;</label>
-                            <button id="btnAplicarFiltros" class="btn btn-primary w-100">Aplicar Filtros</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?php endif; ?>
-            <!--Oracle-->
-            <?php if ($oracle_online): ?>
-            <div class="card mb-4">
-                <div class="card-header card-header-custom">
-                    <h5>🔍 Filtros de Búsqueda - Oracle</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>Filtrar por evento:</label>
-                            <select id="filtroTablaOracle" class="form-select">
-                                <option value="">Todos</option>
-                                <option value="REPLICADO">Replicado</option>
-                                <option value="ERROR">Error</option>
-                                <option value="CONFLICTO">Conflicto</option>
-                                <option value="PENDIENTE">Pendiente</option>
-                                <option value="JOB">Job</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <label>Filtrar por estado:</label>
-                            <select id="filtroEstadoOracle" class="form-select">
-                                <option value="">Todos</option>
-                                <option value="REPLICADO">Replicados</option>
-                                <option value="PENDIENTE">Pendientes</option>
-                                <option value="ERROR">Errores</option>
-                                <option value="CONFLICTO">Conflictos</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <label>&nbsp;</label>
-                            <button id="btnAplicarFiltrosOracle" class="btn btn-primary w-100">Aplicar Filtros Oracle</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?php endif; ?>
         </div>
         <!--Boton flotante de recargar-->
         <button class="btn btn-success refresh-btn" onclick="cargarDatos()">
@@ -732,24 +672,23 @@
                     }
                     
                     if (tieneDatosEstados) {
-                        //Grafica con 3 colores para Oracle
                         chartEstadoOracle = new Chart(canvasEstadoOracle, {
                             type: 'bar',
                             data: {
                                 labels: oracleLabels,
                                 datasets: [
                                     {
-                                        label: '✅ Replicados (Oracle)',
+                                        label: '✅ Replicados',
                                         data: oracleReplicados,
                                         backgroundColor: '#20c997'  //Verde menta
                                     },
                                     {
-                                        label: '⏳ Pendientes (Oracle)',
+                                        label: '⏳ Pendientes',
                                         data: oraclePendientes,
                                         backgroundColor: '#fd7e14'  //Naranja
                                     },
                                     {
-                                        label: '❌ Errores (Oracle)',
+                                        label: '❌ Errores',
                                         data: oracleErrores,
                                         backgroundColor: '#dc3545'  //Rojo
                                     }

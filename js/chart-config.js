@@ -16,15 +16,15 @@ const CHART_COLORS = {
     },
     replicados: {
         color: '#28a745',
-        label: '✅ Replicados (MySQL)'
+        label: '✅ Replicados'
     },
     pendientes: {
         color: '#ffc107',
-        label: '⏳ Pendientes (MySQL)'
+        label: '⏳ Pendientes'
     },
     errores: {
         color: '#dc3545',
-        label: '❌ Errores (MySQL)'
+        label: '❌ Errores'
     },
     oracle_registros: {
         color: '#6c5ce7',
@@ -32,11 +32,11 @@ const CHART_COLORS = {
     },
     exito: {
         color: '#28a745',
-        label: '✅ Éxito (MySQL)'
+        label: '✅ Éxito'
     },
     fallo: {
         color: '#dc3545',
-        label: '❌ Fallo (MySQL)'
+        label: '❌ Fallo'
     },
     sin_datos: {
         color: '#6c757d',

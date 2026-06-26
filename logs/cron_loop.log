@@ -1597,3 +1597,166 @@
 [2026-06-26 10:55:27] Oracle→MySQL | HTTP 100 - ❌ ERROR: Recv failure: Connection was reset
 [2026-06-26 15:48:52] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2237 ms: Couldn't connect to server
 [2026-06-26 15:48:52] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2232 ms: Couldn't connect to server
+[2026-06-26 16:47:02] MySQL→Oracle | HTTP 200 - ✅ Procesados: 0, Pendientes: 0
+[2026-06-26 16:47:09] MySQL→Oracle | HTTP 200 - ✅ Procesados: 0, Pendientes: 0
+[2026-06-26 16:47:09] Oracle→MySQL | HTTP 200 - ✅ Procesados: 9, Pendientes: 188
+[2026-06-26 16:48:04] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 9
+[2026-06-26 16:48:04] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 188
+[2026-06-26 16:49:12] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 9
+[2026-06-26 16:49:12] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 188
+[2026-06-26 16:50:19] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 9
+[2026-06-26 16:50:19] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 188
+[2026-06-26 16:51:25] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 9
+[2026-06-26 16:51:25] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 188
+[2026-06-26 16:52:34] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 9
+[2026-06-26 16:52:34] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 188
+[2026-06-26 16:53:42] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 9
+[2026-06-26 16:53:42] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 188
+[2026-06-26 16:54:48] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 9
+[2026-06-26 16:54:48] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 188
+[2026-06-26 16:55:56] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 9
+[2026-06-26 16:55:56] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 188
+[2026-06-26 16:57:02] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 10
+[2026-06-26 16:57:02] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 188
+[2026-06-26 16:58:11] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 10
+[2026-06-26 16:58:11] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 188
+[2026-06-26 16:59:19] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 10
+[2026-06-26 16:59:19] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 188
+[2026-06-26 17:00:26] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 10
+[2026-06-26 17:00:26] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 188
+[2026-06-26 17:01:37] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 10
+[2026-06-26 17:01:37] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 188
+[2026-06-26 17:02:48] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 10
+[2026-06-26 17:02:48] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 188
+[2026-06-26 17:04:02] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 10
+[2026-06-26 17:04:02] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 188
+[2026-06-26 17:05:15] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 10
+[2026-06-26 17:05:15] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 188
+[2026-06-26 17:06:25] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 10
+[2026-06-26 17:06:25] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 188
+[2026-06-26 17:07:38] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 10
+[2026-06-26 17:07:38] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 188
+[2026-06-26 17:08:46] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 10
+[2026-06-26 17:08:46] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 188
+[2026-06-26 17:09:59] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 10
+[2026-06-26 17:09:59] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 188
+[2026-06-26 17:11:11] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 10
+[2026-06-26 17:11:11] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 188
+[2026-06-26 17:12:17] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 10
+[2026-06-26 17:12:17] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 188
+[2026-06-26 17:13:31] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 10
+[2026-06-26 17:13:31] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 188
+[2026-06-26 17:14:38] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 10
+[2026-06-26 17:14:38] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25010 milliseconds with 0 bytes received
+[2026-06-26 17:15:50] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:15:50] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:16:28] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:16:28] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:17:02] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:17:04] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:17:02] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:17:04] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:17:39] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:17:41] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:17:39] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:17:41] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:18:16] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:18:18] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:18:16] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:18:18] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:18:54] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:18:56] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:18:54] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:18:56] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:19:30] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:19:33] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:19:30] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:19:33] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:20:08] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:20:09] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:20:08] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:20:09] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:20:45] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:20:47] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:20:45] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:20:47] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:21:22] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:21:23] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:21:22] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:21:23] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:21:59] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:22:00] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:21:59] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:22:00] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:22:36] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:22:36] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:22:36] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:22:36] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:23:14] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:23:14] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:23:14] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:23:52] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:23:52] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:23:52] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:24:29] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:24:29] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:24:29] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:25:06] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:25:06] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:25:43] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:25:43] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:25:43] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:26:20] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:26:20] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:26:20] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:26:57] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:26:57] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:26:57] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:27:33] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:27:33] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:27:33] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:27:33] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:28:11] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:28:11] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:28:11] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:28:11] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:28:48] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:28:48] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:28:48] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 17:28:48] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"MySQL no disponible"}
+[2026-06-26 18:17:03] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25016 milliseconds with 0 bytes received
+[2026-06-26 18:17:03] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25005 milliseconds with 0 bytes received
+[2026-06-26 18:18:23] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25009 milliseconds with 0 bytes received
+[2026-06-26 18:18:23] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25004 milliseconds with 0 bytes received
+[2026-06-26 18:19:43] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25010 milliseconds with 0 bytes received
+[2026-06-26 18:19:43] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25001 milliseconds with 0 bytes received
+[2026-06-26 18:21:03] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25003 milliseconds with 0 bytes received
+[2026-06-26 18:21:03] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25004 milliseconds with 0 bytes received
+[2026-06-26 18:22:23] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25014 milliseconds with 0 bytes received
+[2026-06-26 18:22:23] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25013 milliseconds with 0 bytes received
+[2026-06-26 18:23:43] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25007 milliseconds with 0 bytes received
+[2026-06-26 18:23:43] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25012 milliseconds with 0 bytes received
+[2026-06-26 18:25:03] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25017 milliseconds with 0 bytes received
+[2026-06-26 18:25:03] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25016 milliseconds with 0 bytes received
+[2026-06-26 18:26:23] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25014 milliseconds with 0 bytes received
+[2026-06-26 18:26:23] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25011 milliseconds with 0 bytes received
+[2026-06-26 18:27:43] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25017 milliseconds with 0 bytes received
+[2026-06-26 18:27:43] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25012 milliseconds with 0 bytes received
+[2026-06-26 18:29:03] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25012 milliseconds with 0 bytes received
+[2026-06-26 18:29:03] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25014 milliseconds with 0 bytes received
+[2026-06-26 18:30:23] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25011 milliseconds with 0 bytes received
+[2026-06-26 18:30:23] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25001 milliseconds with 0 bytes received
+[2026-06-26 18:31:43] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25004 milliseconds with 0 bytes received
+[2026-06-26 18:31:43] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25008 milliseconds with 0 bytes received
+[2026-06-26 18:33:03] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25003 milliseconds with 0 bytes received
+[2026-06-26 18:33:03] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25013 milliseconds with 0 bytes received
+[2026-06-26 18:34:23] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25005 milliseconds with 0 bytes received
+[2026-06-26 18:34:23] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25005 milliseconds with 0 bytes received
+[2026-06-26 18:35:43] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25002 milliseconds with 0 bytes received
+[2026-06-26 18:35:43] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25009 milliseconds with 0 bytes received
+[2026-06-26 18:37:03] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25078 milliseconds with 0 bytes received
+[2026-06-26 18:37:03] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25012 milliseconds with 0 bytes received
+[2026-06-26 18:38:23] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25006 milliseconds with 0 bytes received
+[2026-06-26 18:38:23] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25005 milliseconds with 0 bytes received
+[2026-06-26 18:39:43] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25005 milliseconds with 0 bytes received
+[2026-06-26 18:39:43] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25016 milliseconds with 0 bytes received
