@@ -1,4 +1,4 @@
-/*ESTILOS BASE Y TARJETAS DE ESTADÍSTICAS*/
+/*ESTILOS BASE Y TARJETAS DE ESTADISTICAS*/
 .card-stats { 
     transition: transform 0.2s; 
     cursor: pointer;
@@ -8,7 +8,7 @@
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-/*ESTADOS DE CONEXIÓN*/
+/*ESTADOS DE CONEXION*/
 .status-online { 
     color: #28a745; 
     font-weight: bold; 
@@ -36,7 +36,7 @@
     cursor: pointer;
 }
 
-/*BOTÓN DE REFRESCO*/
+/*BOTON DE REFRESCO*/
 .refresh-btn { 
     position: fixed; 
     bottom: 20px; 
@@ -69,7 +69,7 @@
     color: #fff;
 }
 
-/*TOOLTIPS PARA ESTADOS DE CONEXIÓN*/
+/*TOOLTIPS PARA ESTADOS DE CONEXION*/
 [data-tooltip] {
     position: relative;
     cursor: help;
@@ -102,7 +102,7 @@
     color: rgba(255,255,255,0.8) !important;
 }
 
-/*TARJETA DE ESTADO DE CONEXIÓN*/
+/*TARJETA DE ESTADO DE CONEXION*/
 .card-estado {
     border: 1px solid #dee2e6 !important;
     border-radius: 8px !important;
@@ -161,7 +161,7 @@
     margin-left: 10px; 
 }
 
-/*COMPARACIÓN DE TABLAS*/
+/*COMPARACION DE TABLAS*/
 .comparison-match { 
     background-color: #d4edda; 
 }
@@ -238,7 +238,7 @@
     }
 }
 
-/*TABLA DE COMPARACIÓN*/
+/*TABLA DE COMPARACION*/
 @media (max-width: 576px) {
     #tablaComparacion {
         font-size: 12px;
@@ -250,4 +250,9 @@
     #tablaComparacion code {
         font-size: 10px;
     }
+}
+
+.badge-conflicto {
+    background-color: #17a2b8;
+    color: #fff;
 }

@@ -1,6 +1,5 @@
-
 /*
-Define los colores y etiquetas utilizados en las diferentes visualizaciones de datos para mantener consistencia visual.
+Define los colores y etiquetas utilizados en las diferentes visualizaciones de datos
 */
 const CHART_COLORS = {
     mysql: {
@@ -45,11 +44,11 @@ const CHART_COLORS = {
     }
 };
 
-// NOMBRES PARA LAS TABLAS. Mapea los nombres tecnicos de las tablas (tanto MySQL como Oracle) a nombres mas descriptivos y legibles para los usuarios.
+//NOMBRES PARA LAS TABLAS. Mapea los nombres tecnicos de las tablas (tanto MySQL como Oracle) a nombres mas descriptivos y legibles para los usuarios.
 const FRIENDLY_TABLE_NAMES = {
-    // Nombres MySQL
+    //Nombres MySQL
     'tbl_clientes_logisticos': 'Clientes',
-    'centros_logisticos': 'Centros Logísticos',
+    'centros_logisticos': 'Centros Logisticos',
     'unidades_transporte': 'Unidades Transporte',
     'contenedores': 'Contenedores',
     'stock_carga': 'Inventario',
@@ -58,36 +57,36 @@ const FRIENDLY_TABLE_NAMES = {
     'servicios_logisticos': 'Servicios',
     'factura_servicios': 'Detalle Factura',
     'movimientos_carga': 'Transferencias',
-    // Nombres Oracle
-    'CLIENTE_NAVIERA': 'Clientes (Oracle)',
-    'TERMINAL_PORTUARIA': 'Centros (Oracle)',
-    'BUQUE_OPERACION': 'Unidades (Oracle)',
-    'CONTENEDOR_NAVIERO': 'Contenedores (Oracle)',
-    'INVENTARIO_CARGA': 'Inventario (Oracle)',
-    'EMBARQUE_MARITIMO': 'Embarques (Oracle)',
-    'FACTURACION_EMBARQUE': 'Facturas (Oracle)',
-    'SERVICIO_PORTUARIO': 'Servicios (Oracle)',
-    'DETALLE_FACTURA_SERVICIO': 'Detalle (Oracle)',
-    'TRANSFERENCIA_CARGA': 'Transferencias (Oracle)'
+    //Nombres Oracle
+    'CLIENTE_NAVIERA': 'Clientes',
+    'TERMINAL_PORTUARIA': 'Centros',
+    'BUQUE_OPERACION': 'Unidades',
+    'CONTENEDOR_NAVIERO': 'Contenedores',
+    'INVENTARIO_CARGA': 'Inventario',
+    'EMBARQUE_MARITIMO': 'Embarques',
+    'FACTURACION_EMBARQUE': 'Facturas',
+    'SERVICIO_PORTUARIO': 'Servicios',
+    'DETALLE_FACTURA_SERVICIO': 'Detalle',
+    'TRANSFERENCIA_CARGA': 'Transferencias'
 };
 
-// FUNCIONES DE UTILIDAD
+//FUNCIONES DE UTILIDAD
 
-// Obtener nombre de una tabla
+//Obtener nombre de una tabla
 function getFriendlyTableName(tableName) {
     return FRIENDLY_TABLE_NAMES[tableName] || tableName;
 }
 
-// Obtener nombres para un array de tablas
+//Obtener nombres para un array de tablas
 function getFriendlyTableNames(tableNames) {
     return tableNames.map(function(table) {
         return getFriendlyTableName(table);
     });
 }
 
-// CONFIGURACIONES
+//CONFIGURACIONES
 
-// Configuracion base para graficas
+//Configuracion base para graficas
 const CHART_OPTIONS = {
     responsive: true,
     maintainAspectRatio: false,
@@ -98,7 +97,7 @@ const CHART_OPTIONS = {
     }
 };
 
-// Configuracion para grafica de barras
+//Configuracion para grafica de barras
 const BAR_CHART_OPTIONS = {
     ...CHART_OPTIONS,
     scales: {
@@ -117,7 +116,7 @@ const BAR_CHART_OPTIONS = {
     }
 };
 
-// Configuracion para grafica de líneas
+//Configuracion para grafica de lineas
 const LINE_CHART_OPTIONS = {
     ...CHART_OPTIONS,
     scales: {
@@ -130,7 +129,7 @@ const LINE_CHART_OPTIONS = {
     }
 };
 
-// Configuracion para grafica de dona
+//Configuracion para grafica de dona
 const DOUGHNUT_CHART_OPTIONS = {
     ...CHART_OPTIONS,
     plugins: {
@@ -141,7 +140,7 @@ const DOUGHNUT_CHART_OPTIONS = {
     }
 };
 
-// Configuracion para grafica sin datos
+//Configuracion para grafica sin datos
 const NO_DATA_CHART_OPTIONS = {
     responsive: true,
     maintainAspectRatio: false,
