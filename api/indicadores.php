@@ -4,7 +4,6 @@
     Incluir el archivo de configuracion de la base de datos
     */
     require_once '../config/db.php';
-
     //Devuelve datos en formato JSON
     header('Content-Type: application/json');
     //Permite peticiones desde cualquie origen (CORS)
@@ -88,40 +87,75 @@
     //DATOS DE ORACLE
     //Se verifica la conexion a Oracle y se obtienen métricas de las tablas disponibles en la base de datos
     if (isOracleConnected()) {
-        //Verificar si existe la tabla de bitacora en Oracle
         $checkBitacora = queryOracle("SELECT table_name FROM user_tables WHERE table_name = 'BITACORA'");
         
         if (!isset($checkBitacora['error']) && !empty($checkBitacora)) {
-            //La tabla existe, obtener estadisticas
             $sql = "SELECT 
-                    SUM(CASE WHEN estado_replicacion = 'PENDIENTE' THEN 1 ELSE 0 END) as pendientes,
-                    SUM(CASE WHEN estado_replicacion = 'REPLICADO' THEN 1 ELSE 0 END) as replicados,
-                    SUM(CASE WHEN estado_replicacion = 'ERROR' THEN 1 ELSE 0 END) as errores,
-                    SUM(CASE WHEN estado_replicacion = 'CONFLICTO' THEN 1 ELSE 0 END) as conflictos
-                FROM BITACORA";
-        
-        $result = queryOracle($sql);
-        if (!isset($result['error']) && !empty($result)) {
-            $response['oracle_pendientes'] = (int)($result[0]['PENDIENTES'] ?? 0);
-            $response['oracle_replicados'] = (int)($result[0]['REPLICADOS'] ?? 0);
-            $response['oracle_errores'] = (int)($result[0]['ERRORES'] ?? 0);
-            $response['oracle_conflictos'] = (int)($result[0]['CONFLICTOS'] ?? 0);
-        }
+                        SUM(CASE WHEN UPPER(estado_replicacion) = 'PENDIENTE' THEN 1 ELSE 0 END) as PENDIENTES,
+                        SUM(CASE WHEN UPPER(estado_replicacion) = 'REPLICADO' THEN 1 ELSE 0 END) as REPLICADOS,
+                        SUM(CASE WHEN UPPER(estado_replicacion) = 'ERROR' THEN 1 ELSE 0 END) as ERRORES,
+                        SUM(CASE WHEN UPPER(estado_replicacion) = 'CONFLICTO' THEN 1 ELSE 0 END) as CONFLICTOS
+                    FROM BITACORA";
+            
+            $result = queryOracle($sql);
+            
+            if (!isset($result['error']) && !empty($result) && isset($result[0])) {
+                $response['oracle_pendientes'] = (int)($result[0]['PENDIENTES'] ?? 0);
+                $response['oracle_replicados'] = (int)($result[0]['REPLICADOS'] ?? 0);
+                $response['oracle_errores'] = (int)($result[0]['ERRORES'] ?? 0);
+                $response['oracle_conflictos'] = (int)($result[0]['CONFLICTOS'] ?? 0);
+            } else {
+                //Si no hay datos, intentar con LOGS_REPLICACION_ORACLE
+                $checkLogs = queryOracle("SELECT table_name FROM user_tables WHERE table_name = 'LOGS_REPLICACION_ORACLE'");
+                
+                if (!isset($checkLogs['error']) && !empty($checkLogs)) {
+                    $sqlLogs = "SELECT 
+                                    SUM(CASE WHEN UPPER(evento) LIKE '%REPLIC%' OR UPPER(evento) LIKE '%EXITO%' THEN 1 ELSE 0 END) as REPLICADOS,
+                                    SUM(CASE WHEN UPPER(evento) LIKE '%PENDIENT%' OR UPPER(evento) LIKE '%ESPERA%' THEN 1 ELSE 0 END) as PENDIENTES,
+                                    SUM(CASE WHEN UPPER(evento) LIKE '%ERROR%' OR UPPER(evento) LIKE '%FALLO%' THEN 1 ELSE 0 END) as ERRORES,
+                                    SUM(CASE WHEN UPPER(evento) LIKE '%CONFLICT%' THEN 1 ELSE 0 END) as CONFLICTOS
+                                FROM LOGS_REPLICACION_ORACLE";
+                    
+                    $resultLogs = queryOracle($sqlLogs);
+                    
+                    if (!isset($resultLogs['error']) && !empty($resultLogs) && isset($resultLogs[0])) {
+                        $response['oracle_replicados'] = (int)($resultLogs[0]['REPLICADOS'] ?? 0);
+                        $response['oracle_pendientes'] = (int)($resultLogs[0]['PENDIENTES'] ?? 0);
+                        $response['oracle_errores'] = (int)($resultLogs[0]['ERRORES'] ?? 0);
+                        $response['oracle_conflictos'] = (int)($resultLogs[0]['CONFLICTOS'] ?? 0);
+                    }
+                }
+            }
         } else {
-            //La tabla no existe, dejar valores en 0 (no hay replicacion desde Oracle)
-            $response['oracle_pendientes'] = 0;
-            $response['oracle_replicados'] = 0;
-            $response['oracle_errores'] = 0;
-            $response['oracle_conflictos'] = 0;
+            //BITACORA no existe, intentar con LOGS_REPLICACION_ORACLE
+            $checkLogs = queryOracle("SELECT table_name FROM user_tables WHERE table_name = 'LOGS_REPLICACION_ORACLE'");
+            
+            if (!isset($checkLogs['error']) && !empty($checkLogs)) {
+                $sqlLogs = "SELECT 
+                                SUM(CASE WHEN UPPER(evento) LIKE '%REPLIC%' OR UPPER(evento) LIKE '%EXITO%' THEN 1 ELSE 0 END) as REPLICADOS,
+                                SUM(CASE WHEN UPPER(evento) LIKE '%PENDIENT%' OR UPPER(evento) LIKE '%ESPERA%' THEN 1 ELSE 0 END) as PENDIENTES,
+                                SUM(CASE WHEN UPPER(evento) LIKE '%ERROR%' OR UPPER(evento) LIKE '%FALLO%' THEN 1 ELSE 0 END) as ERRORES,
+                                SUM(CASE WHEN UPPER(evento) LIKE '%CONFLICT%' THEN 1 ELSE 0 END) as CONFLICTOS
+                            FROM LOGS_REPLICACION_ORACLE";
+                
+                $resultLogs = queryOracle($sqlLogs);
+                
+                if (!isset($resultLogs['error']) && !empty($resultLogs) && isset($resultLogs[0])) {
+                    $response['oracle_replicados'] = (int)($resultLogs[0]['REPLICADOS'] ?? 0);
+                    $response['oracle_pendientes'] = (int)($resultLogs[0]['PENDIENTES'] ?? 0);
+                    $response['oracle_errores'] = (int)($resultLogs[0]['ERRORES'] ?? 0);
+                    $response['oracle_conflictos'] = (int)($resultLogs[0]['CONFLICTOS'] ?? 0);
+                }
+            }
         }
-        //Obtiene todas las tablas disponibles en Oracle y cuenta cuantas existen
+
+        // Obtener tablas de Oracle
         $tables = getOracleTables();
         $response['oracle_tables'] = count($tables);
-        //Obtiene el conteo de registros por tabla en Oracle y calcula el total sumando todos los conteos
         $stats = getOracleTableStats();
         $response['oracle_rows'] = array_sum($stats);
     }
-
+    //Totales combinados
     $response['total_pendientes'] = $response['pendientes'] + $response['oracle_pendientes'];
     $response['total_replicados'] = $response['replicados'] + $response['oracle_replicados'];
     $response['total_errores'] = $response['errores'] + $response['oracle_errores'];

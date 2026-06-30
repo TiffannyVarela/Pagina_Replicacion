@@ -116,7 +116,7 @@
                 'oracle_error' => $oracleError
             ];
             
-            //SSumar los valores validos (mayores o iguales a 0)
+            //Sumar los valores validos (mayores o iguales a 0)
             if ($mysqlCount >= 0) {
                 $response['total_mysql_records'] += $mysqlCount;
             }

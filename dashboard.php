@@ -4,7 +4,6 @@
     Incluir el archivo de configuracion de la base de datos
     */
     require_once 'config/db.php';
-
     //Verificar conexion para mostrar estado inicial
     //Estado de conexion a MySQL
     $mysql_online = isMySQLConnected();
@@ -384,7 +383,65 @@
                     </div>
                 </div>
             </div>
-            
+            <!-- Eventos Oracle -->
+            <div class="card mb-4">
+                <div class="card-header card-header-custom">
+                    <h5>📋 Últimos 10 Eventos - Oracle</h5>
+                    <small class="text-white-50">Eventos registrados en la bitácora de Oracle</small>
+                </div>
+                <div class="card-body">
+                    <!-- Filtros para Oracle -->
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label>Filtrar por tabla:</label>
+                            <select id="filtroTablaOracle" class="form-select form-select-sm">
+                                <option value="">Todas</option>
+                                <option value="CLIENTE_NAVIERA">Clientes</option>
+                                <option value="TERMINAL_PORTUARIA">Centros</option>
+                                <option value="CONTENEDOR_NAVIERO">Contenedores</option>
+                                <option value="EMBARQUE_MARITIMO">Embarques</option>
+                                <option value="INVENTARIO_CARGA">Inventario</option>
+                                <option value="FACTURACION_EMBARQUE">Facturas</option>
+                                <option value="SERVICIO_PORTUARIO">Servicios</option>
+                                <option value="DETALLE_FACTURA_SERVICIO">Detalle Factura</option>
+                                <option value="TRANSFERENCIA_CARGA">Transferencias</option>
+                                <option value="BUQUE_OPERACION">Unidades Transporte</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Filtrar por estado:</label>
+                            <select id="filtroEstadoOracle" class="form-select form-select-sm">
+                                <option value="">Todos</option>
+                                <option value="REPLICADO">Replicados</option>
+                                <option value="PENDIENTE">Pendientes</option>
+                                <option value="ERROR">Errores</option>
+                                <option value="CONFLICTO">Conflictos</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label>&nbsp;</label>
+                            <button id="btnAplicarFiltrosOracle" class="btn btn-primary btn-sm w-100">Aplicar Filtros</button>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <?php if (!$oracle_online): ?>
+                            <div class="data-unavailable">
+                                <p>📡 Datos no disponibles - Oracle offline</p>
+                            </div>
+                        <?php else: ?>
+                            <table class="table table-sm table-events">
+                                <thead>
+                                    <tr><th>ID</th><th>Tabla</th><th>Operacion</th><th>Fecha/Hora</th><th>Estado</th></tr>
+                                </thead>
+                                <tbody id="tablaEventosOracle">
+                                    <tr><td colspan="5" class="text-center">Cargando...</td></tr>
+                                </tbody>
+                            </table>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
             <!--Registros con Error. Muestra los errores de replicacion-->
             <div class="card mb-4">
                 <div class="card-header card-header-custom">

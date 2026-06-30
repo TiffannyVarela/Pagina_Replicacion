@@ -4,7 +4,6 @@
     Incluir el archivo de configuracion de la base de datos
     */
     require_once '../config/db.php';
-
     //Devuelve datos en formato JSON
     header('Content-Type: application/json');
     //Permite peticiones desde cualquie origen (CORS)
@@ -142,6 +141,11 @@
                     ];
                 }
             }
+
+            $response['pendientes_por_tabla'] = $pendientesFinal;
+            $response['errores_por_tabla'] = $erroresFinal;
+            $response['replicados_por_tabla'] = $replicadosFinal;
+            $response['oracle_sync'] = $oracleSync;
             
             //Calculo de porcentaje de éxito
             //Porcentaje desde MySQL
@@ -276,218 +280,36 @@
                 }
             }
             
-            //Por si hay tablas en Oracle que no estan en el mapeo
-            $allOracleTables = getOracleTables();
-            foreach ($allOracleTables as $table) {
-                if (!in_array($table, $excludeTables) && !isset($response['oracle']['table_data'][$table])) {
-                    $count = countOracleTable($table);
-                    $response['oracle']['table_data'][$table] = $count;
-                }
-            }
-            
-            //RECOLECCION DE ESTADOS DE ORACLE DESDE LOGS_REPLICACION_ORACLE
-            $oracleEstados = [
-                'replicados_por_tabla' => [],
-                'pendientes_por_tabla' => [],
-                'errores_por_tabla' => [],
-                'conflictos_por_tabla' => [],
-                'tablas' => []
-            ];
-            
-            //Verificar si existe LOGS_REPLICACION_ORACLE
-            $checkLogs = queryOracle("SELECT table_name FROM user_tables WHERE table_name = 'LOGS_REPLICACION_ORACLE'");
-            
-            if (!isset($checkLogs['error']) && !empty($checkLogs)) {
-                //OBTENER EVENTOS POR TIPO DESDE LOGS_REPLICACION_ORACLE
-                //La tabla LOGS_REPLICACION_ORACLE tiene: evento, descripcion, fecha
-                //Vamos a agrupar por evento para mostrar en la grafica
-                $sqlEstados = "SELECT 
-                                evento as TABLA_AFECTADA,
-                                COUNT(*) as TOTAL
-                              FROM LOGS_REPLICACION_ORACLE
-                              GROUP BY evento
-                              ORDER BY evento";
-                
-                $resultEstados = queryOracle($sqlEstados);
-                
-                if (!isset($resultEstados['error']) && !empty($resultEstados)) {
-                    //Inicializar contadores para los tipos de eventos comunes
-                    $eventosMap = [
-                        'REPLICADO' => 0,
-                        'PENDIENTE' => 0,
-                        'ERROR' => 0,
-                        'CONFLICTO' => 0,
-                        'ERROR_CONEXION' => 0,
-                        'JOB_EJECUTADO' => 0,
-                        'SINCRONIZACION' => 0,
-                        'OTRO' => 0
-                    ];
-                    
-                    foreach ($resultEstados as $row) {
-                        $evento = strtoupper($row['TABLA_AFECTADA'] ?? 'OTRO');
-                        
-                        //Mapear eventos a categorias
-                        if (strpos($evento, 'REPLIC') !== false || strpos($evento, 'EXITO') !== false) {
-                            $eventosMap['REPLICADO'] += (int)$row['TOTAL'];
-                        } elseif (strpos($evento, 'PENDIENT') !== false || strpos($evento, 'ESPERA') !== false) {
-                            $eventosMap['PENDIENTE'] += (int)$row['TOTAL'];
-                        } elseif (strpos($evento, 'ERROR') !== false || strpos($evento, 'FALLO') !== false) {
-                            $eventosMap['ERROR'] += (int)$row['TOTAL'];
-                        } elseif (strpos($evento, 'CONFLICT') !== false) {
-                            $eventosMap['CONFLICTO'] += (int)$row['TOTAL'];
-                        } elseif (strpos($evento, 'CONEXION') !== false) {
-                            $eventosMap['ERROR_CONEXION'] += (int)$row['TOTAL'];
-                        } elseif (strpos($evento, 'JOB') !== false || strpos($evento, 'EJECUT') !== false) {
-                            $eventosMap['JOB_EJECUTADO'] += (int)$row['TOTAL'];
-                        } else {
-                            $eventosMap['OTRO'] += (int)$row['TOTAL'];
-                        }
-                    }
-                    
-                    //Construir el array de estados
-                    $oracleEstados['tablas'] = ['REPLICADO', 'PENDIENTE', 'ERROR', 'CONFLICTO'];
-                    $oracleEstados['replicados_por_tabla'] = [$eventosMap['REPLICADO'], 0, 0, 0];
-                    $oracleEstados['pendientes_por_tabla'] = [0, $eventosMap['PENDIENTE'], 0, 0];
-                    $oracleEstados['errores_por_tabla'] = [0, 0, $eventosMap['ERROR'], 0];
-                    $oracleEstados['conflictos_por_tabla'] = [0, 0, 0, $eventosMap['CONFLICTO']];
-                    
-                    $response['oracle_estados'] = $oracleEstados;
-                }
-            } else {
-                //FALLBACK: Usar BITACORA si existe
-                $checkBitacora = queryOracle("SELECT table_name FROM user_tables WHERE table_name = 'BITACORA'");
-                
-                if (!isset($checkBitacora['error']) && !empty($checkBitacora)) {
-                    //Detectar nombres de columnas en BITACORA
-                    $columnCheck = queryOracle("SELECT * FROM BITACORA WHERE ROWNUM = 1");
-                    
-                    if (!isset($columnCheck['error']) && !empty($columnCheck)) {
-                        $columnNames = array_keys($columnCheck[0]);
-                        
-                        $tablaCol = null;
-                        $estadoCol = null;
-                        
-                        foreach ($columnNames as $col) {
-                            $colUpper = strtoupper($col);
-                            if (strpos($colUpper, 'TABLA') !== false || strpos($colUpper, 'TABLE') !== false) {
-                                $tablaCol = $col;
-                            }
-                            if (strpos($colUpper, 'ESTADO') !== false || strpos($colUpper, 'STATUS') !== false) {
-                                $estadoCol = $col;
-                            }
-                        }
-                        
-                        if (!$tablaCol) $tablaCol = 'TABLA_AFECTADA';
-                        if (!$estadoCol) $estadoCol = 'ESTADO_REPLICACION';
-                        
-                        $sqlEstados = "SELECT 
-                                        $tablaCol as TABLA_AFECTADA,
-                                        SUM(CASE WHEN $estadoCol = 'REPLICADO' THEN 1 ELSE 0 END) as REPLICADOS,
-                                        SUM(CASE WHEN $estadoCol = 'PENDIENTE' THEN 1 ELSE 0 END) as PENDIENTES,
-                                        SUM(CASE WHEN $estadoCol = 'ERROR' THEN 1 ELSE 0 END) as ERRORES,
-                                        SUM(CASE WHEN $estadoCol = 'CONFLICTO' THEN 1 ELSE 0 END) as CONFLICTOS
-                                      FROM BITACORA
-                                      GROUP BY $tablaCol
-                                      ORDER BY $tablaCol";
-                        
-                        $resultEstados = queryOracle($sqlEstados);
-                        
-                        if (!isset($resultEstados['error']) && !empty($resultEstados)) {
-                            foreach ($resultEstados as $row) {
-                                $oracleEstados['tablas'][] = $row['TABLA_AFECTADA'];
-                                $oracleEstados['replicados_por_tabla'][] = (int)$row['REPLICADOS'];
-                                $oracleEstados['pendientes_por_tabla'][] = (int)$row['PENDIENTES'];
-                                $oracleEstados['errores_por_tabla'][] = (int)$row['ERRORES'];
-                                $oracleEstados['conflictos_por_tabla'][] = (int)$row['CONFLICTOS'];
-                            }
-                            
-                            $response['oracle_estados'] = $oracleEstados;
-                        }
-                    }
-                }
-            }
-            
-            //Si no se encontraron datos en LOGS_REPLICACION_ORACLE ni en BITACORA, usar datos de las tablas mapeadas como fallback
-            if (empty($response['oracle_estados']['tablas'])) {
-                $tablasOracle = array_keys($response['oracle']['table_data']);
-                $oracleEstados = [
-                    'replicados_por_tabla' => [],
-                    'pendientes_por_tabla' => [],
-                    'errores_por_tabla' => [],
-                    'conflictos_por_tabla' => [],
-                    'tablas' => []
-                ];
-                
-                foreach ($tablasOracle as $tabla) {
-                    $oracleEstados['tablas'][] = $tabla;
-                    $oracleEstados['replicados_por_tabla'][] = 0;
-                    $oracleEstados['pendientes_por_tabla'][] = 0;
-                    $oracleEstados['errores_por_tabla'][] = 0;
-                    $oracleEstados['conflictos_por_tabla'][] = 0;
-                }
-                
+            $oracleEstados = obtenerEstadosDesdeBitacoraOracle();
+            if (!empty($oracleEstados['tablas'])) {
                 $response['oracle_estados'] = $oracleEstados;
             }
             
-            //EVENTOS POR HORA - Oracle
             $oracleHoras = [];
             $oracleCantidades = [];
-            
-            //Inicializar todas las horas con 0
             for ($i = 0; $i < 24; $i++) {
                 $oracleHoras[] = str_pad($i, 2, '0', STR_PAD_LEFT) . ':00';
                 $oracleCantidades[] = 0;
             }
             
-            //Intentar desde LOGS_REPLICACION_ORACLE (usando columna fecha)
-            $checkLogsHoras = queryOracle("SELECT table_name FROM user_tables WHERE table_name = 'LOGS_REPLICACION_ORACLE'");
-            if (!isset($checkLogsHoras['error']) && !empty($checkLogsHoras)) {
-                //Usar la columna fecha de LOGS_REPLICACION_ORACLE
-                $oracleLogs = queryOracle("SELECT TO_CHAR(fecha, 'HH24') as hora, COUNT(*) as total 
-                                           FROM LOGS_REPLICACION_ORACLE 
-                                           WHERE fecha >= SYSDATE - 1 
-                                           GROUP BY TO_CHAR(fecha, 'HH24') 
-                                           ORDER BY hora ASC");
+            $checkBitacora = queryOracle("SELECT table_name FROM user_tables WHERE table_name = 'BITACORA'");
+            if (!isset($checkBitacora['error']) && !empty($checkBitacora)) {
+                // Obtener eventos por hora desde BITACORA
+                $sqlEventosHora = "SELECT 
+                                    TO_CHAR(fecha_hora, 'HH24') as HORA, 
+                                    COUNT(*) as TOTAL 
+                                  FROM BITACORA 
+                                  WHERE fecha_hora >= SYSDATE - 1 
+                                  GROUP BY TO_CHAR(fecha_hora, 'HH24') 
+                                  ORDER BY HORA ASC";
                 
-                if (!isset($oracleLogs['error']) && !empty($oracleLogs)) {
-                    foreach ($oracleLogs as $row) {
-                        $hora = (int)$row['HORA'];
+                $resultEventos = queryOracle($sqlEventosHora);
+                
+                if (!isset($resultEventos['error']) && !empty($resultEventos)) {
+                    foreach ($resultEventos as $row) {
+                        $hora = (int)($row['HORA'] ?? 0);
                         if ($hora >= 0 && $hora < 24) {
-                            $oracleCantidades[$hora] = (int)$row['TOTAL'];
-                        }
-                    }
-                }
-            } else {
-                //Fallback a BITACORA
-                $checkBitacoraHoras = queryOracle("SELECT table_name FROM user_tables WHERE table_name = 'BITACORA'");
-                if (!isset($checkBitacoraHoras['error']) && !empty($checkBitacoraHoras)) {
-                    //Detectar columna de fecha en BITACORA
-                    $columnCheck = queryOracle("SELECT * FROM BITACORA WHERE ROWNUM = 1");
-                    if (!isset($columnCheck['error']) && !empty($columnCheck)) {
-                        $columnNames = array_keys($columnCheck[0]);
-                        $fechaCol = null;
-                        foreach ($columnNames as $col) {
-                            $colUpper = strtoupper($col);
-                            if (strpos($colUpper, 'FECHA') !== false || strpos($colUpper, 'DATE') !== false || strpos($colUpper, 'TIME') !== false) {
-                                $fechaCol = $col;
-                                break;
-                            }
-                        }
-                        if (!$fechaCol) $fechaCol = 'FECHA_HORA';
-                        
-                        $oracleLogs = queryOracle("SELECT TO_CHAR($fechaCol, 'HH24') as hora, COUNT(*) as total 
-                                                   FROM BITACORA 
-                                                   WHERE $fechaCol >= SYSDATE - 1 
-                                                   GROUP BY TO_CHAR($fechaCol, 'HH24') 
-                                                   ORDER BY hora ASC");
-                        
-                        if (!isset($oracleLogs['error']) && !empty($oracleLogs)) {
-                            foreach ($oracleLogs as $row) {
-                                $hora = (int)$row['HORA'];
-                                if ($hora >= 0 && $hora < 24) {
-                                    $oracleCantidades[$hora] = (int)$row['TOTAL'];
-                                }
-                            }
+                            $oracleCantidades[$hora] = (int)($row['TOTAL'] ?? 0);
                         }
                     }
                 }
@@ -506,4 +328,66 @@
 
     //Devuelve la respuesta completa en formato JSON con todas las estadistcas recolectadas
     echo json_encode($response);
+    
+    function obtenerPorcentajeExitoOracle() {
+        $checkBitacora = queryOracle("SELECT table_name FROM user_tables WHERE table_name = 'BITACORA'");
+        if (isset($checkBitacora['error']) || empty($checkBitacora)) {
+            return 0;
+        }
+        
+        $sql = "SELECT 
+                    ROUND(SUM(CASE WHEN UPPER(estado_replicacion) = 'REPLICADO' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) as PORCENTAJE
+                FROM BITACORA 
+                WHERE fecha_hora >= SYSDATE - 1";
+        
+        $result = queryOracle($sql);
+        
+        if (!isset($result['error']) && !empty($result) && isset($result[0])) {
+            return (float)($result[0]['PORCENTAJE'] ?? 0);
+        }
+        
+        return 0;
+    }
+
+    /*
+    OBTENER ESTADOS DE REPLICACIÓN DESDE BITACORA ORACLE
+    */
+    function obtenerEstadosDesdeBitacoraOracle() {
+        $resultado = [
+            'replicados_por_tabla' => [],
+            'pendientes_por_tabla' => [],
+            'errores_por_tabla' => [],
+            'conflictos_por_tabla' => [],
+            'tablas' => []
+        ];
+        
+        $checkBitacora = queryOracle("SELECT table_name FROM user_tables WHERE table_name = 'BITACORA'");
+        if (isset($checkBitacora['error']) || empty($checkBitacora)) {
+            return $resultado;
+        }
+        
+        $sql = "SELECT 
+                tabla_afectada as TABLA_AFECTADA,
+                SUM(CASE WHEN UPPER(estado_replicacion) = 'REPLICADO' THEN 1 ELSE 0 END) as REPLICADOS,
+                SUM(CASE WHEN UPPER(estado_replicacion) = 'PENDIENTE' THEN 1 ELSE 0 END) as PENDIENTES,
+                SUM(CASE WHEN UPPER(estado_replicacion) = 'ERROR' THEN 1 ELSE 0 END) as ERRORES,
+                SUM(CASE WHEN UPPER(estado_replicacion) = 'CONFLICTO' THEN 1 ELSE 0 END) as CONFLICTOS
+            FROM BITACORA
+            GROUP BY tabla_afectada
+            ORDER BY tabla_afectada";
+        
+        $result = queryOracle($sql);
+        
+        if (!isset($result['error']) && !empty($result)) {
+            foreach ($result as $row) {
+                $resultado['tablas'][] = $row['TABLA_AFECTADA'];
+                $resultado['replicados_por_tabla'][] = (int)($row['REPLICADOS'] ?? 0);
+                $resultado['pendientes_por_tabla'][] = (int)($row['PENDIENTES'] ?? 0);
+                $resultado['errores_por_tabla'][] = (int)($row['ERRORES'] ?? 0);
+                $resultado['conflictos_por_tabla'][] = (int)($row['CONFLICTOS'] ?? 0);
+            }
+        }
+        
+        return $resultado;
+    }
     ?>

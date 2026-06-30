@@ -8,7 +8,6 @@
      5. Actualiza estado de la bitacora
      6. Registra logs del proceso
      */
-
     /*
     CONFIGURACION INICIAL
     Incluir el archivo de configuracion de la base de datos
@@ -171,15 +170,17 @@
                 $update->bind_param("i", $id);
                 $update->execute();
                 $update->close();
+
+                $oracle_ok = insertarEnBitacoraOracle($conn_oracle, $tabla_oracle, $tipo, $id_registro, $datos_transformados);
                 
-                $procesados++;
-                $detalles[] = "ID $id: $tabla_mysql → $tabla_oracle ($tipo)";
-                if ($procesados > 0) {
-                    actualizarCheckpoint($conn_mysql, $id);
+                if ($oracle_ok) {
+                    $procesados++;
+                    $detalles[] = "ID $id: $tabla_mysql → $tabla_oracle ($tipo)";
+                    registrarLog($conn_mysql, 'REPLICADO', "ID $id: $tabla_mysql → Oracle ($tipo)");
+                } else {
+                    $errores[] = "ID $id: Error al insertar en BITACORA Oracle";
                 }
-                //Registrar en logs
-                registrarLog($conn_mysql, 'REPLICADO', "ID $id: $tabla_mysql → Oracle ($tipo)");
-                
+                    
             } else {
                 //ERROR: Marcar como error
                 $error_msg = $error_msg ?? "Error al replicar a Oracle";
@@ -1112,6 +1113,78 @@
         
         return date('Y-m-d H:i:s', $timestamp);
     }
+
+    function insertarEnBitacoraOracle($conn, $tabla_oracle, $tipo, $id_registro, $datos) {
+            $checkBitacora = queryOracle("SELECT table_name FROM user_tables WHERE table_name = 'BITACORA'");
+            
+            if (isset($checkBitacora['error']) || empty($checkBitacora)) {
+                //BITACORA no existe, intentar con LOGS_REPLICACION_ORACLE
+                $descripcion = "Replicado: $tabla_oracle - ID: $id_registro - Tipo: $tipo";
+                $sql = "INSERT INTO LOGS_REPLICACION_ORACLE (evento, descripcion, fecha) 
+                        VALUES ('REPLICADO', :descripcion, SYSTIMESTAMP)";
+                
+                $stmt = oci_parse($conn, $sql);
+                oci_bind_by_name($stmt, ':descripcion', $descripcion);
+                $result = oci_execute($stmt);
+                oci_free_statement($stmt);
+                
+                return $result;
+            }
+            
+            // Convertir tipo_operacion a CHAR(1)
+            $tipo_char = '';
+            if ($tipo == 'INSERT') $tipo_char = 'I';
+            elseif ($tipo == 'UPDATE') $tipo_char = 'U';
+            elseif ($tipo == 'DELETE') $tipo_char = 'D';
+            else $tipo_char = 'I';
+            
+            // Convertir datos a JSON
+            $datos_json = json_encode($datos);
+            
+            // Generar hash
+            $hash = hash('sha256', $tabla_oracle . $id_registro . json_encode($datos));
+            
+            $sql = "INSERT INTO BITACORA (
+                        id_registro,
+                        tabla_afectada,
+                        tipo_operacion,
+                        fecha_hora,
+                        datos_json,
+                        usuario_bd,
+                        ip_origen,
+                        origen_evento,
+                        hash_registro,
+                        version_registro,
+                        estado_replicacion,
+                        intentos_replicacion
+                    ) VALUES (
+                        :id_registro,
+                        :tabla_afectada,
+                        :tipo_operacion,
+                        SYSTIMESTAMP,
+                        :datos_json,
+                        USER,
+                        SYS_CONTEXT('USERENV', 'IP_ADDRESS'),
+                        'MYSQL',
+                        :hash_registro,
+                        1,
+                        'REPLICADO',
+                        0
+                    )";
+            
+            $stmt = oci_parse($conn, $sql);
+            oci_bind_by_name($stmt, ':id_registro', $id_registro);
+            oci_bind_by_name($stmt, ':tabla_afectada', $tabla_oracle);
+            oci_bind_by_name($stmt, ':tipo_operacion', $tipo_char);
+            oci_bind_by_name($stmt, ':datos_json', $datos_json);
+            oci_bind_by_name($stmt, ':hash_registro', $hash);
+            
+            $result = oci_execute($stmt);
+            oci_free_statement($stmt);
+            
+            return $result;
+        }
+
 
     //Actualizar checkpoint de replicacion
     function actualizarCheckpoint($conn_mysql, $ultimo_id) {

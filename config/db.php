@@ -10,6 +10,7 @@
     define('MYSQL_USERNAME', 'replicador');
     define('MYSQL_PASSWORD', 'replicacion-2026');
 
+
     //CONFIGURACION ORACLE (AWS RDS)
     //Host (en este caso se tuvo que usar la ip por problemas con el llamado al URL desde OCI8)
     define('ORACLE_HOST', '3.18.30.214');
@@ -54,22 +55,26 @@
 
     /*
     FUNCION PARA OBTENER CONEXION MYSQL
-    bool $retry Indica si se deben realizar reintentos en caso de fallo
-    mysqli|null Objeto de conexion MySQL o null si falla
-    string $mysql_error Ultimo error de MySQL
-    string $mysql_last_error_time Timestamp del ultimo error
     */
     function getMySQLConnection($retry = true) {
-        global $mysql_error, $mysql_last_error_time;
-        //Numero maximo de reintentos (3 si $retry es true, 1 si es false)
+        global $mysql_error, $mysql_last_error_time, $conn_mysql;
+        
+        if (isset($conn_mysql) && $conn_mysql !== null) {
+            try {
+                if (@$conn_mysql->ping()) {
+                    return $conn_mysql;
+                }
+            } catch (Exception $e) {
+                //La conexion no es valida, continuar con una nueva
+            }
+        }
+        
         $maxRetries = $retry ? 3 : 1;
         $attempt = 0;
         $lastError = null;
-
-        //Bucle de reintentos
+        
         while ($attempt < $maxRetries) {
             try {
-                //Intentar conexion a MySQL
                 $conn = @new mysqli(
                     MYSQL_HOST, 
                     MYSQL_USERNAME, 
@@ -77,38 +82,38 @@
                     MYSQL_DATABASE, 
                     MYSQL_PORT
                 );
-                //Verificar si la conexion fue exitosa
+                
                 if (!$conn->connect_error) {
-                    //Configurar charset y timeouts
                     $conn->set_charset("utf8mb4");
                     $conn->query("SET SESSION wait_timeout = 28800");
                     $conn->query("SET SESSION interactive_timeout = 28800");
-                    //Registrar exito si hubo reintentos
+                    
+                    $conn_mysql = $conn;
+                    
                     if ($attempt > 0) {
                         logError("Conexion MySQL exitosa después de $attempt reintentos", 'INFO');
                     }
                     return $conn;
                 }
-                //Capturar error de conexion
+                
                 $lastError = $conn->connect_error;
                 logError("Intento $attempt: Error MySQL: $lastError", 'WARNING');
-                $conn->close();
                 
             } catch (Exception $e) {
-                //Capturar excepcion
                 $lastError = $e->getMessage();
                 logError("Intento $attempt: Excepcion MySQL: $lastError", 'WARNING');
             }
-            //Incrementar intentos y esperar antes de reintentar
+            
             $attempt++;
             if ($attempt < $maxRetries) {
                 sleep(1);
             }
         }
-        //Si todos los intentos fallan, registrar error global
+        
         $mysql_error = "No se pudo conectar a MySQL después de $maxRetries intentos: $lastError";
         $mysql_last_error_time = date('Y-m-d H:i:s');
         logError($mysql_error, 'ERROR');
+        $conn_mysql = null;
         return null;
     }
 
@@ -121,56 +126,69 @@
     }
 
     /*
-    Obtiene una conexion a Oracle con sistema de reintentos
-    bool $retry Indica si se deben realizar reintentos en caso de fallo
-    resource|null Recurso de conexion Oracle o null si falla
-    string $oracle_error Ultimo error de Oracle
-    string $oracle_last_error_time Timestamp del ultimo error
+    Obtiene una conexion a Oracle
      */
     function getOracleConnection($retry = true) {
-        global $oracle_error, $oracle_last_error_time;
-        //Verificar que la extension OCI8 este instalada
+        global $oracle_error, $oracle_last_error_time, $oracle_conn;
+        
+        //Si ya hay una conexion, verificarla
+        if (isset($oracle_conn) && $oracle_conn !== null) {
+            // Verificar si la conexion sigue activa
+            try {
+                $check = oci_parse($oracle_conn, "SELECT 1 FROM DUAL");
+                if (@oci_execute($check)) {
+                    oci_free_statement($check);
+                    return $oracle_conn;
+                }
+                oci_free_statement($check);
+            } catch (Exception $e) {
+                //Conexion no valida, continuar con una nueva
+            }
+            oci_close($oracle_conn);
+            $oracle_conn = null;
+        }
+        
         if (!extension_loaded('oci8')) {
             logError('OCI8 extension no instalada', 'CRITICAL');
             return null;
         }
-        //Numero maximo de reintentos
+        
         $maxRetries = $retry ? 3 : 1;
         $attempt = 0;
         $lastError = null;
-        //Bucle de reintentos
+        
         while ($attempt < $maxRetries) {
             try {
-                //Intentar conexion a Oracle
                 $tns = getOracleTNS();
                 $conn = @oci_connect(ORACLE_USERNAME, ORACLE_PASSWORD, $tns, ORACLE_CHARSET);
-                //Verificar si la conexion fue exitosa
+                
                 if ($conn) {
+                    $oracle_conn = $conn;
                     if ($attempt > 0) {
                         logError("Conexion Oracle exitosa después de $attempt reintentos", 'INFO');
                     }
                     return $conn;
                 }
-                //Capturar error de conexion
+                
                 $e = oci_error();
                 $lastError = $e['message'] ?? 'Error desconocido';
                 logError("Intento $attempt: Error Oracle: $lastError", 'WARNING');
                 
             } catch (Exception $e) {
-                //Capturar excepcion
                 $lastError = $e->getMessage();
                 logError("Intento $attempt: Excepcion Oracle: $lastError", 'WARNING');
             }
-            //Incrementar intentos y esperar antes de reintentar
+            
             $attempt++;
             if ($attempt < $maxRetries) {
                 sleep(1);
             }
         }
-        //Si todos los intentos fallan, registrar error global
+        
         $oracle_error = "No se pudo conectar a Oracle después de $maxRetries intentos: $lastError";
         $oracle_last_error_time = date('Y-m-d H:i:s');
         logError($oracle_error, 'ERROR');
+        $oracle_conn = null;
         return null;
     }
 
@@ -182,27 +200,41 @@
 
     //Verifica si la conexion a MySQL esta activa
     function isMySQLConnected() {
+        global $conn_mysql;
+        
+        if (isset($conn_mysql) && $conn_mysql !== null) {
+            try {
+                return @$conn_mysql->ping();
+            } catch (Exception $e) {
+                logError("Excepcion en isMySQLConnected: " . $e->getMessage(), 'ERROR');
+                return false;
+            }
+        }
+        
+        //Intentar reconectar
         $conn = getMySQLConnection(false);
         if ($conn === null) return false;
-        try {
-            //Ping para verificar que la conexion sigue viva
-            $ping = @$conn->ping();
-            if (!$ping) {
-                logError("MySQL ping fallo", 'WARNING');
-            }
-            $conn->close();
-            return $ping;
-        } catch (Exception $e) {
-            logError("Excepcion en isMySQLConnected: " . $e->getMessage(), 'ERROR');
-            return false;
-        }
+        return true;
     }
 
     //Verifica si la conexion a Oracle esta activa
     function isOracleConnected() {
+        global $oracle_conn;
+        
+        if (isset($oracle_conn) && $oracle_conn !== null) {
+            try {
+                $check = oci_parse($oracle_conn, "SELECT 1 FROM DUAL");
+                $result = @oci_execute($check);
+                oci_free_statement($check);
+                return $result;
+            } catch (Exception $e) {
+                return false;
+            }
+        }
+        
+        // Intentar reconectar
         $conn = getOracleConnection(false);
         if ($conn) {
-            oci_close($conn);
             return true;
         }
         return false;

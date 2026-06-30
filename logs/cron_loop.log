@@ -1760,3 +1760,260 @@
 [2026-06-26 18:38:23] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25005 milliseconds with 0 bytes received
 [2026-06-26 18:39:43] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25005 milliseconds with 0 bytes received
 [2026-06-26 18:39:43] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25016 milliseconds with 0 bytes received
+[2026-06-26 18:41:03] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25011 milliseconds with 0 bytes received
+[2026-06-26 18:41:03] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25010 milliseconds with 0 bytes received
+[2026-06-26 19:38:45] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2222 ms: Couldn't connect to server
+[2026-06-26 19:38:45] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2239 ms: Couldn't connect to server
+[2026-06-26 19:39:20] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2226 ms: Couldn't connect to server
+[2026-06-26 19:39:20] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2228 ms: Couldn't connect to server
+[2026-06-26 19:39:54] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2240 ms: Couldn't connect to server
+[2026-06-26 19:39:54] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2239 ms: Couldn't connect to server
+[2026-06-26 19:40:29] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25014 milliseconds with 0 bytes received
+[2026-06-26 19:40:29] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25008 milliseconds with 0 bytes received
+[2026-06-26 19:41:49] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         {"error":"Oracle no disponible"}
+[2026-06-26 19:41:49] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         {"error":"Oracle no disponible"}
+[2026-06-26 19:43:01] MySQL→Oracle | HTTP 200 - ✅ Procesados: 0, Pendientes: 0
+[2026-06-26 19:43:01] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25005 milliseconds with 0 bytes received
+[2026-06-26 19:43:59] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 0
+[2026-06-26 19:44:01] MySQL→Oracle | HTTP 200 - ✅ Procesados: 9, Pendientes: 0
+[2026-06-26 19:43:59] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 196
+[2026-06-26 19:45:11] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 11
+[2026-06-26 19:45:11] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 11
+[2026-06-26 19:45:11] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 206
+[2026-06-26 19:46:22] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 21
+[2026-06-26 19:46:22] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 216
+[2026-06-26 19:47:33] MySQL→Oracle | HTTP 200 - ⚠️ Respuesta:         <br />
+<b>Warning</b>:  oci_execute(): ORA-00001: unique constraint (ADMIN.SYS_C006375) viol
+[2026-06-26 19:47:33] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 225
+[2026-06-26 19:48:45] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 42
+[2026-06-26 19:48:45] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 235
+[2026-06-26 19:49:55] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 52
+[2026-06-26 19:49:55] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 52
+[2026-06-26 19:49:55] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 245
+[2026-06-26 19:49:55] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 245
+[2026-06-26 19:51:05] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 62
+[2026-06-26 19:51:05] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 62
+[2026-06-26 19:51:05] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 255
+[2026-06-26 19:51:05] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 255
+[2026-06-26 19:52:17] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 72
+[2026-06-26 19:52:17] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 72
+[2026-06-26 19:52:17] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 265
+[2026-06-26 19:52:17] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 265
+[2026-06-26 19:53:28] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 82
+[2026-06-26 19:53:28] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 82
+[2026-06-26 19:53:28] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 275
+[2026-06-26 19:54:40] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 92
+[2026-06-26 19:54:40] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 92
+[2026-06-26 19:54:40] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25001 milliseconds with 0 bytes received
+[2026-06-26 19:54:40] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25015 milliseconds with 0 bytes received
+[2026-06-26 19:55:55] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 102
+[2026-06-26 19:55:55] MySQL→Oracle | HTTP 200 - ✅ Procesados: 10, Pendientes: 102
+[2026-06-26 19:55:55] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 295
+[2026-06-26 19:55:55] Oracle→MySQL | HTTP 200 - ✅ Procesados: 10, Pendientes: 295
+[2026-06-26 20:08:46] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2255 ms: Couldn't connect to server
+[2026-06-26 20:08:46] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2267 ms: Couldn't connect to server
+[2026-06-26 20:38:46] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2254 ms: Couldn't connect to server
+[2026-06-26 20:38:46] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2257 ms: Couldn't connect to server
+[2026-06-26 20:39:20] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2233 ms: Couldn't connect to server
+[2026-06-26 20:59:49] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2240 ms: Couldn't connect to server
+[2026-06-26 20:59:49] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2225 ms: Couldn't connect to server
+[2026-06-26 21:00:24] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2240 ms: Couldn't connect to server
+[2026-06-26 21:00:24] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2208 ms: Couldn't connect to server
+[2026-06-26 21:00:58] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25014 milliseconds with 0 bytes received
+[2026-06-26 21:00:58] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25011 milliseconds with 0 bytes received
+[2026-06-26 21:02:18] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25008 milliseconds with 0 bytes received
+[2026-06-26 21:02:18] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25010 milliseconds with 0 bytes received
+[2026-06-26 21:03:38] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25012 milliseconds with 0 bytes received
+[2026-06-26 21:03:38] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25015 milliseconds with 0 bytes received
+[2026-06-26 21:04:59] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25011 milliseconds with 0 bytes received
+[2026-06-26 21:04:59] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25009 milliseconds with 0 bytes received
+[2026-06-26 21:06:19] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25016 milliseconds with 0 bytes received
+[2026-06-26 21:06:19] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25017 milliseconds with 0 bytes received
+[2026-06-26 21:07:39] MySQL→Oracle | HTTP 100 - ❌ ERROR: Operation timed out after 25001 milliseconds with 0 bytes received
+[2026-06-26 21:07:39] Oracle→MySQL | HTTP 100 - ❌ ERROR: Operation timed out after 25013 milliseconds with 0 bytes received
+[2026-06-26 21:08:59] MySQL→Oracle | HTTP 100 - ❌ ERROR: Recv failure: Connection was reset
+[2026-06-26 21:08:59] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2257 ms: Couldn't connect to server
+[2026-06-26 21:29:49] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2255 ms: Couldn't connect to server
+[2026-06-26 21:29:49] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2244 ms: Couldn't connect to server
+[2026-06-26 21:59:50] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2283 ms: Couldn't connect to server
+[2026-06-26 21:59:50] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2228 ms: Couldn't connect to server
+[2026-06-27 04:00:53] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2238 ms: Couldn't connect to server
+[2026-06-27 04:00:53] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2245 ms: Couldn't connect to server
+[2026-06-27 04:01:27] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2237 ms: Couldn't connect to server
+[2026-06-27 04:30:52] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2261 ms: Couldn't connect to server
+[2026-06-27 04:30:52] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2209 ms: Couldn't connect to server
+[2026-06-27 05:00:52] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2226 ms: Couldn't connect to server
+[2026-06-27 05:00:52] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2235 ms: Couldn't connect to server
+[2026-06-27 05:28:06] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2242 ms: Couldn't connect to server
+[2026-06-27 05:28:06] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2233 ms: Couldn't connect to server
+[2026-06-27 05:30:52] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2240 ms: Couldn't connect to server
+[2026-06-27 05:30:52] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2222 ms: Couldn't connect to server
+[2026-06-27 06:00:52] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2226 ms: Couldn't connect to server
+[2026-06-27 06:00:52] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2233 ms: Couldn't connect to server
+[2026-06-27 06:30:52] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2241 ms: Couldn't connect to server
+[2026-06-27 06:30:52] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2219 ms: Couldn't connect to server
+[2026-06-27 07:00:52] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2236 ms: Couldn't connect to server
+[2026-06-27 07:00:52] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2220 ms: Couldn't connect to server
+[2026-06-27 07:01:27] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2237 ms: Couldn't connect to server
+[2026-06-27 07:01:27] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2244 ms: Couldn't connect to server
+[2026-06-27 07:30:53] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2237 ms: Couldn't connect to server
+[2026-06-27 07:30:53] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2233 ms: Couldn't connect to server
+[2026-06-27 08:00:52] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2253 ms: Couldn't connect to server
+[2026-06-27 08:00:52] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2210 ms: Couldn't connect to server
+[2026-06-27 22:26:42] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2243 ms: Couldn't connect to server
+[2026-06-27 22:26:42] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2234 ms: Couldn't connect to server
+[2026-06-27 22:27:19] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2213 ms: Couldn't connect to server
+[2026-06-27 22:27:19] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2251 ms: Couldn't connect to server
+[2026-06-27 22:56:42] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2223 ms: Couldn't connect to server
+[2026-06-27 22:56:42] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2250 ms: Couldn't connect to server
+[2026-06-27 22:57:16] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2224 ms: Couldn't connect to server
+[2026-06-27 22:57:16] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2237 ms: Couldn't connect to server
+[2026-06-27 23:26:42] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2248 ms: Couldn't connect to server
+[2026-06-27 23:26:42] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2245 ms: Couldn't connect to server
+[2026-06-27 23:27:16] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2258 ms: Couldn't connect to server
+[2026-06-27 23:27:16] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2229 ms: Couldn't connect to server
+[2026-06-27 23:27:51] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2259 ms: Couldn't connect to server
+[2026-06-27 23:27:51] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2263 ms: Couldn't connect to server
+[2026-06-27 23:56:42] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2251 ms: Couldn't connect to server
+[2026-06-27 23:56:42] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2249 ms: Couldn't connect to server
+[2026-06-27 23:56:46] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2250 ms: Couldn't connect to server
+[2026-06-27 23:56:46] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2257 ms: Couldn't connect to server
+[2026-06-28 04:31:07] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2238 ms: Couldn't connect to server
+[2026-06-28 04:31:07] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2232 ms: Couldn't connect to server
+[2026-06-28 04:59:01] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2234 ms: Couldn't connect to server
+[2026-06-28 04:59:01] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2232 ms: Couldn't connect to server
+[2026-06-28 04:59:54] MySQL→Oracle | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2244 ms: Couldn't connect to server
+[2026-06-28 04:59:54] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2247 ms: Couldn't connect to server
+[2026-06-28 05:00:23] MySQL→Oracle | HTTP 200 - ✅ Procesados: 0, Pendientes: 0
+[2026-06-28 05:00:23] Oracle→MySQL | HTTP 200 - ✅ Procesados: 9, Pendientes: 111 | ❌ Errores: 1
+[2026-06-28 05:02:50] MySQL→Oracle | HTTP 200 - ✅ Procesados: 0, Pendientes: 9
+[2026-06-28 05:02:50] Oracle→MySQL | HTTP 200 - ✅ Procesados: 2, Pendientes: 109 | ❌ Errores: 8
+[2026-06-28 05:03:48] MySQL→Oracle | HTTP 200 - ✅ Procesados: 2, Pendientes: 9
+[2026-06-28 05:03:48] Oracle→MySQL | HTTP 200 - ✅ Procesados: 0, Pendientes: 111 | ❌ Errores: 10
+[2026-06-28 05:04:48] MySQL→Oracle | HTTP 200 - ✅ Procesados: 0, Pendientes: 9
+[2026-06-28 05:04:48] Oracle→MySQL | HTTP 200 - ✅ Procesados: 0, Pendientes: 111 | ❌ Errores: 10
+[2026-06-28 05:07:11] Oracle→MySQL | HTTP 200 - ✅ Procesados: 0, Pendientes: 111 | ❌ Errores: 10
+[2026-06-29 01:09:19] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2242 ms: Couldn't connect to server
+[2026-06-29 14:54:56] Oracle→MySQL | HTTP 0 - ❌ ERROR: Failed to connect to localhost port 80 after 2232 ms: Couldn't connect to server
+[2026-06-29 15:54:55] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         <br />
+<b>Fatal error</b>:  Uncaught Error: mysqli object is already closed in C:\xampp\htdo
+[2026-06-29 15:59:06] Oracle→MySQL | HTTP 200 - ✅ Procesados: 0, Pendientes: 80 | ❌ Errores: 10
+[2026-06-29 15:59:41] Oracle→MySQL | HTTP 200 - ✅ Procesados: 0, Pendientes: 80 | ❌ Errores: 10
+[2026-06-29 16:00:17] Oracle→MySQL | HTTP 200 - ✅ Procesados: 0, Pendientes: 80 | ❌ Errores: 10
+[2026-06-29 16:05:39] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         <br />
+<b>Fatal error</b>:  Uncaught TypeError: json_decode(): Argument #1 ($json) must be o
+[2026-06-29 16:06:15] Oracle→MySQL | HTTP 200 - ⚠️ Respuesta:         <br />
+<b>Fatal error</b>:  Uncaught TypeError: json_decode(): Argument #1 ($json) must be o
+[2026-06-29 16:42:08] Oracle→MySQL | HTTP 200 - ✅ Procesados: 0, Pendientes: 10 | ❌ Errores: 10
+[2026-06-29 16:42:52] Oracle→MySQL | HTTP 200 - ✅ Procesados: 0, Pendientes: 0 | ❌ Errores: 10
+[2026-06-29 16:43:38] Oracle→MySQL | HTTP 200 - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 16:44:12] Oracle→MySQL | HTTP 200 - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 16:45:46] Oracle→MySQL | HTTP 200 - ✅ Procesados: 0, Pendientes: 70 | ❌ Errores: 10
+[2026-06-29 16:46:30] Oracle→MySQL | HTTP 200 - ✅ Procesados: 0, Pendientes: 60 | ❌ Errores: 10
+[2026-06-29 16:47:14] Oracle→MySQL | HTTP 200 - ✅ Procesados: 0, Pendientes: 50 | ❌ Errores: 10
+[2026-06-29 16:47:58] Oracle→MySQL | HTTP 200 - ✅ Procesados: 0, Pendientes: 40 | ❌ Errores: 10
+[2026-06-29 19:03:02] Oracle→MySQL | HTTP 200 | Duración: 10.93s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:03:42] Oracle→MySQL | HTTP 200 | Duración: 12.42s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:04:25] Oracle→MySQL | HTTP 200 | Duración: 11.68s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:05:07] Oracle→MySQL | HTTP 200 | Duración: 12.57s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:05:49] Oracle→MySQL | HTTP 200 | Duración: 11.32s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:06:31] Oracle→MySQL | HTTP 200 | Duración: 13.46s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:07:14] Oracle→MySQL | HTTP 200 | Duración: 12.38s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:07:56] Oracle→MySQL | HTTP 200 | Duración: 11.05s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:08:37] Oracle→MySQL | HTTP 200 | Duración: 13.2s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:09:21] Oracle→MySQL | HTTP 200 | Duración: 12.87s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:10:04] Oracle→MySQL | HTTP 200 | Duración: 12.3s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:10:46] Oracle→MySQL | HTTP 200 | Duración: 12.58s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:11:28] Oracle→MySQL | HTTP 200 | Duración: 13.71s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:12:12] Oracle→MySQL | HTTP 200 | Duración: 12.27s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:12:55] Oracle→MySQL | HTTP 200 | Duración: 12.17s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:13:37] Oracle→MySQL | HTTP 200 | Duración: 13.41s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:14:20] Oracle→MySQL | HTTP 200 | Duración: 13.51s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:15:04] Oracle→MySQL | HTTP 200 | Duración: 15.47s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:15:49] Oracle→MySQL | HTTP 200 | Duración: 13.61s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:16:33] Oracle→MySQL | HTTP 200 | Duración: 12.49s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:17:15] Oracle→MySQL | HTTP 200 | Duración: 13.72s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:17:59] Oracle→MySQL | HTTP 200 | Duración: 11.56s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:18:41] Oracle→MySQL | HTTP 200 | Duración: 11.14s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:19:22] Oracle→MySQL | HTTP 200 | Duración: 10.78s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:20:02] Oracle→MySQL | HTTP 200 | Duración: 11.34s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:20:44] Oracle→MySQL | HTTP 200 | Duración: 11.68s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:21:26] Oracle→MySQL | HTTP 200 | Duración: 12.08s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:22:08] Oracle→MySQL | HTTP 200 | Duración: 13.19s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:22:51] Oracle→MySQL | HTTP 200 | Duración: 11.05s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-29 19:24:56] Oracle→MySQL | HTTP 0 | Duración: 2.23s - ❌ ERROR: Failed to connect to localhost port 80 after 2228 ms: Couldn't connect to server
+[2026-06-29 23:46:11] Oracle→MySQL | HTTP 0 | Duración: 2.22s - ❌ ERROR: Failed to connect to localhost port 80 after 2216 ms: Couldn't connect to server
+[2026-06-30 00:33:13] Oracle→MySQL | HTTP 200 | Duración: 11s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:33:54] Oracle→MySQL | HTTP 200 | Duración: 11.37s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:34:35] Oracle→MySQL | HTTP 200 | Duración: 11.4s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:35:17] Oracle→MySQL | HTTP 200 | Duración: 10.92s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:35:58] Oracle→MySQL | HTTP 200 | Duración: 12.18s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:36:40] Oracle→MySQL | HTTP 200 | Duración: 11.26s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:37:21] Oracle→MySQL | HTTP 200 | Duración: 11.06s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:38:02] Oracle→MySQL | HTTP 200 | Duración: 10.74s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:38:43] Oracle→MySQL | HTTP 200 | Duración: 11.33s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:39:24] Oracle→MySQL | HTTP 200 | Duración: 9.83s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:40:04] Oracle→MySQL | HTTP 200 | Duración: 11.09s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:40:45] Oracle→MySQL | HTTP 200 | Duración: 10.55s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:41:26] Oracle→MySQL | HTTP 200 | Duración: 8.4s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:42:04] Oracle→MySQL | HTTP 200 | Duración: 9.82s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:42:44] Oracle→MySQL | HTTP 200 | Duración: 8.46s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:43:23] Oracle→MySQL | HTTP 200 | Duración: 8.93s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:44:01] Oracle→MySQL | HTTP 200 | Duración: 8.86s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:44:40] Oracle→MySQL | HTTP 200 | Duración: 8.9s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:45:19] Oracle→MySQL | HTTP 200 | Duración: 8.43s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:45:58] Oracle→MySQL | HTTP 200 | Duración: 8.62s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:46:10] Oracle→MySQL | HTTP 200 | Duración: 9.93s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:46:36] Oracle→MySQL | HTTP 200 | Duración: 10.07s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:46:50] Oracle→MySQL | HTTP 200 | Duración: 8.8s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:47:17] Oracle→MySQL | HTTP 200 | Duración: 9.14s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:47:29] Oracle→MySQL | HTTP 200 | Duración: 28.67s - ⚠️ Respuesta:     <br />
+<b>Warning</b>:  oci_parse(): ORA-03114: not connected to ORACLE in <b>C:\xampp\htdocs\Pa
+[2026-06-30 00:47:56] Oracle→MySQL | HTTP 200 | Duración: 8.7s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:48:27] Oracle→MySQL | HTTP 200 | Duración: 8.78s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:48:34] Oracle→MySQL | HTTP 200 | Duración: 9.27s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:49:06] Oracle→MySQL | HTTP 200 | Duración: 9.03s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:49:14] Oracle→MySQL | HTTP 200 | Duración: 10.04s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:49:45] Oracle→MySQL | HTTP 200 | Duración: 8.59s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:49:54] Oracle→MySQL | HTTP 200 | Duración: 8.61s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:50:24] Oracle→MySQL | HTTP 200 | Duración: 8.9s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:50:32] Oracle→MySQL | HTTP 200 | Duración: 9.04s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:51:03] Oracle→MySQL | HTTP 200 | Duración: 8.53s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:51:11] Oracle→MySQL | HTTP 200 | Duración: 11.63s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:51:41] Oracle→MySQL | HTTP 200 | Duración: 25.77s - ⚠️ Respuesta:     <br />
+<b>Warning</b>:  oci_parse(): ORA-03114: not connected to ORACLE in <b>C:\xampp\htdocs\Pa
+[2026-06-30 00:51:53] Oracle→MySQL | HTTP 200 | Duración: 17.61s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:52:37] Oracle→MySQL | HTTP 200 | Duración: 9.4s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:52:41] Oracle→MySQL | HTTP 200 | Duración: 62.76s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:53:16] Oracle→MySQL | HTTP 200 | Duración: 79.89s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:54:13] Oracle→MySQL | HTTP 200 | Duración: 23.51s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:55:06] Oracle→MySQL | HTTP 200 | Duración: 11.65s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:55:07] Oracle→MySQL | HTTP 200 | Duración: 11.3s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:55:48] Oracle→MySQL | HTTP 200 | Duración: 9.84s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:55:48] Oracle→MySQL | HTTP 200 | Duración: 9.9s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:56:28] Oracle→MySQL | HTTP 200 | Duración: 10.53s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:56:28] Oracle→MySQL | HTTP 200 | Duración: 10.34s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:57:08] Oracle→MySQL | HTTP 200 | Duración: 11.85s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:57:08] Oracle→MySQL | HTTP 200 | Duración: 12.06s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:57:50] Oracle→MySQL | HTTP 200 | Duración: 9.98s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:57:50] Oracle→MySQL | HTTP 200 | Duración: 9.86s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:58:30] Oracle→MySQL | HTTP 200 | Duración: 9.81s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:58:30] Oracle→MySQL | HTTP 200 | Duración: 9.92s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:59:10] Oracle→MySQL | HTTP 200 | Duración: 9.52s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:59:10] Oracle→MySQL | HTTP 200 | Duración: 9.61s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:59:50] Oracle→MySQL | HTTP 200 | Duración: 10.31s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 00:59:50] Oracle→MySQL | HTTP 200 | Duración: 10.37s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 01:00:30] Oracle→MySQL | HTTP 200 | Duración: 9.72s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 01:00:30] Oracle→MySQL | HTTP 200 | Duración: 11.26s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 01:01:10] Oracle→MySQL | HTTP 200 | Duración: 10.31s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 01:01:12] Oracle→MySQL | HTTP 200 | Duración: 10.17s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 01:01:50] Oracle→MySQL | HTTP 200 | Duración: 9.1s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 01:01:52] Oracle→MySQL | HTTP 200 | Duración: 9.1s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 01:02:29] Oracle→MySQL | HTTP 200 | Duración: 9.6s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 01:02:31] Oracle→MySQL | HTTP 200 | Duración: 8.98s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 01:03:09] Oracle→MySQL | HTTP 200 | Duración: 9.28s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 01:03:10] Oracle→MySQL | HTTP 200 | Duración: 9.17s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 01:03:48] Oracle→MySQL | HTTP 200 | Duración: 10.72s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 01:03:49] Oracle→MySQL | HTTP 200 | Duración: 9.94s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 01:04:29] Oracle→MySQL | HTTP 200 | Duración: 9.4s - ✅ Procesados: 0, Pendientes: 0
+[2026-06-30 01:04:29] Oracle→MySQL | HTTP 200 | Duración: 9.87s - ✅ Procesados: 0, Pendientes: 0
